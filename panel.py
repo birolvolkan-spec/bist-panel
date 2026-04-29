@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 
 # =========================
-# BIST SYMBOLS (fallback included)
+# BIST SYMBOLS
 # =========================
 def get_bist_symbols():
     try:
@@ -45,14 +45,19 @@ def get_bist_symbols():
 signals = []
 
 # =========================
-# ANALYSIS ENGINE (1-8 SCORE GUARANTEED)
+# ANALYZE (FIXED + EXPLAINED)
 # =========================
 def analyze(symbol):
     try:
         df = yf.download(symbol, period="3mo", interval="1d", progress=False)
 
         if df is None or len(df) < 30:
-            return {"symbol": symbol, "score": 1, "price": 0}
+            return {
+                "symbol": symbol,
+                "score": 1,
+                "price": 0,
+                "details": ["Yetersiz veri"]
+            }
 
         df = df.dropna()
 
@@ -77,42 +82,68 @@ def analyze(symbol):
         last = df.iloc[-1]
 
         score = 0
+        details = []
 
-        # volume
+        # =========================
+        # VOLUME
+        # =========================
         if last["vol_ratio"] > 1.3:
             score += 3
+            details.append("Hacim güçlü (+3)")
         elif last["vol_ratio"] > 1.1:
             score += 2
+            details.append("Hacim orta (+2)")
         else:
             score += 1
+            details.append("Hacim zayıf (+1)")
 
-        # breakout
+        # =========================
+        # BREAKOUT
+        # =========================
         if last["breakout"] > 0.95:
             score += 3
+            details.append("Breakout güçlü (+3)")
         elif last["breakout"] > 0.92:
             score += 2
+            details.append("Breakout orta (+2)")
         else:
             score += 1
+            details.append("Breakout zayıf (+1)")
 
-        # candle
+        # =========================
+        # CANDLE
+        # =========================
         if last["bull"]:
             score += 2
+            details.append("Bullish mum (+2)")
 
+        # =========================
         # RSI
+        # =========================
         if pd.notna(last["rsi"]) and 40 < last["rsi"] < 70:
             score += 1
+            details.append("RSI uygun (+1)")
 
-        # 🔥 GARANTİ ALT SINIR
+        # =========================
+        # SCORE LIMIT
+        # =========================
         if score < 1:
             score = 1
-
         if score > 8:
             score = 8
+
+        # =========================
+        # PRICE FIX (IMPORTANT)
+        # =========================
+        price = last["Close"]
+        if pd.isna(price):
+            price = 0
 
         return {
             "symbol": symbol,
             "score": round(score, 1),
-            "price": round(float(last["Close"]), 2) if not pd.isna(last["Close"]) else 0
+            "price": round(float(price), 2),
+            "details": details
         }
 
     except Exception as e:
@@ -120,19 +151,19 @@ def analyze(symbol):
         return {
             "symbol": symbol,
             "score": 1,
-            "price": 0
+            "price": 0,
+            "details": ["Hata / veri yok"]
         }
 
 
 # =========================
-# FULL SCAN LOOP
+# SCANNER LOOP
 # =========================
 def update_loop():
     global signals
 
     while True:
         temp = []
-
         symbols = get_bist_symbols()
 
         def worker(s):
@@ -142,13 +173,14 @@ def update_loop():
             results = ex.map(worker, symbols)
 
         for r in results:
-            temp.append(r)   # 🔥 artık HERKES giriyor
+            temp.append(r)
 
         signals = sorted(temp, key=lambda x: x["score"], reverse=True)
 
         time.sleep(300)
 
 threading.Thread(target=update_loop, daemon=True).start()
+
 
 # =========================
 # UI
@@ -168,12 +200,14 @@ header { text-align:center; padding:15px; background:#1a1a1a; }
 .high { color:#00ff88; }
 .mid { color:#ffaa00; }
 .low { color:#ff5555; }
+
+.small { font-size:12px; color:#aaa; }
 </style>
 </head>
 
 <body>
 
-<header>📊 FULL BIST SCANNER (1–8 SCORE)</header>
+<header>📊 FULL BIST SCANNER (EXPLAINED AI)</header>
 
 {% for s in signals %}
 <div class="card">
@@ -189,6 +223,14 @@ Price: {{s.price}}<br>
 <span class="low">Score: {{s.score}}</span>
 {% endif %}
 
+<br><br>
+
+<div class="small">
+{% for d in s.details %}
+• {{d}}<br>
+{% endfor %}
+</div>
+
 </div>
 {% endfor %}
 
@@ -196,9 +238,11 @@ Price: {{s.price}}<br>
 </html>
 """
 
+
 @app.route("/")
 def home():
     return render_template_string(HTML, signals=signals)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
