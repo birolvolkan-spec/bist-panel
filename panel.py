@@ -5,11 +5,12 @@ import yfinance as yf
 import ta
 import pandas as pd
 from concurrent.futures import ThreadPoolExecutor
+import os
 
 app = Flask(__name__)
 
 # =========================
-# FULL BIST SYMBOL FETCH
+# BIST SYMBOLS (fallback included)
 # =========================
 def get_bist_symbols():
     try:
@@ -26,14 +27,12 @@ def get_bist_symbols():
 
         symbols = list(set(symbols))
 
-        # çok kısa liste gelirse fallback
         if len(symbols) < 50:
             raise Exception("fallback")
 
         return symbols
 
     except:
-        # fallback (stabil BIST evreni)
         return [
             "AEFES.IS","AGHOL.IS","AKBNK.IS","AKSA.IS","ALARK.IS","ARCLK.IS",
             "ASELS.IS","ASTOR.IS","BIMAS.IS","DOHOL.IS","EKGYO.IS","EREGL.IS",
@@ -43,20 +42,17 @@ def get_bist_symbols():
             "TSKB.IS","TUPRS.IS","ULKER.IS","VAKBN.IS","YKBNK.IS"
         ]
 
-# =========================
-# GLOBAL DATA
-# =========================
 signals = []
 
 # =========================
-# ANALYSIS ENGINE
+# ANALYSIS ENGINE (1-8 SCORE GUARANTEED)
 # =========================
 def analyze(symbol):
     try:
         df = yf.download(symbol, period="3mo", interval="1d", progress=False)
 
         if df is None or len(df) < 30:
-            return None
+            return {"symbol": symbol, "score": 1, "price": 0}
 
         df = df.dropna()
 
@@ -103,17 +99,29 @@ def analyze(symbol):
             score += 2
 
         # RSI
-        if 40 < last["rsi"] < 70:
+        if pd.notna(last["rsi"]) and 40 < last["rsi"] < 70:
             score += 1
+
+        # 🔥 GARANTİ ALT SINIR
+        if score < 1:
+            score = 1
+
+        if score > 8:
+            score = 8
 
         return {
             "symbol": symbol,
             "score": round(score, 1),
-            "price": round(last["Close"], 2)
+            "price": round(float(last["Close"]), 2) if not pd.isna(last["Close"]) else 0
         }
 
-    except:
-        return None
+    except Exception as e:
+        print("ERROR:", symbol, e)
+        return {
+            "symbol": symbol,
+            "score": 1,
+            "price": 0
+        }
 
 
 # =========================
@@ -134,18 +142,16 @@ def update_loop():
             results = ex.map(worker, symbols)
 
         for r in results:
-            if r:
-                temp.append(r)
+            temp.append(r)   # 🔥 artık HERKES giriyor
 
         signals = sorted(temp, key=lambda x: x["score"], reverse=True)
 
         time.sleep(300)
 
-
 threading.Thread(target=update_loop, daemon=True).start()
 
 # =========================
-# UI PANEL
+# UI
 # =========================
 HTML = """
 <!DOCTYPE html>
@@ -158,6 +164,7 @@ HTML = """
 body { background:#0f0f0f; color:white; font-family:Arial; margin:0; }
 header { text-align:center; padding:15px; background:#1a1a1a; }
 .card { background:#1c1c1c; margin:10px; padding:15px; border-radius:12px; }
+
 .high { color:#00ff88; }
 .mid { color:#ffaa00; }
 .low { color:#ff5555; }
@@ -166,7 +173,7 @@ header { text-align:center; padding:15px; background:#1a1a1a; }
 
 <body>
 
-<header>📊 FULL BIST AI SCANNER</header>
+<header>📊 FULL BIST SCANNER (1–8 SCORE)</header>
 
 {% for s in signals %}
 <div class="card">
@@ -194,4 +201,5 @@ def home():
     return render_template_string(HTML, signals=signals)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
