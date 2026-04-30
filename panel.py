@@ -7,6 +7,9 @@ from concurrent.futures import ThreadPoolExecutor
 app = Flask(__name__)
 signals = []
 
+# =========================
+# FULL BIST
+# =========================
 def get_symbols():
     try:
         url = "https://tr.wikipedia.org/wiki/Borsa_%C4%B0stanbul"
@@ -33,6 +36,9 @@ def get_symbols():
             "YKBNK.IS","PETKM.IS","PGSUS.IS","TCELL.IS","ULKER.IS"
         ]
 
+# =========================
+# ASO (PINE -> PYTHON)
+# =========================
 def calculate_aso(df, length=10):
     high = df["High"]
     low = df["Low"]
@@ -59,31 +65,30 @@ def calculate_aso(df, length=10):
 
     return bulls.rolling(length).mean(), bears.rolling(length).mean()
 
+# =========================
+# ANALYZE
+# =========================
 def analyze(symbol):
     try:
-        df_d = yf.download(symbol, period="3mo", interval="1d", progress=False)
-        df_h = yf.download(symbol, period="7d", interval="1h", progress=False)
+        df = yf.download(symbol, period="3mo", interval="1d", progress=False)
 
-        if df_d is None or df_h is None or len(df_d) < 20 or len(df_h) < 20:
+        if df is None or len(df) < 20:
             return None
 
-        bulls_d, bears_d = calculate_aso(df_d)
-        bulls_h, bears_h = calculate_aso(df_h)
+        bulls, bears = calculate_aso(df)
 
-        last_d = df_d.iloc[-1]
+        last = df.iloc[-1]
 
         score = 0
         details = []
 
-        if bulls_d.iloc[-1] > bears_d.iloc[-1]:
+        # ASO
+        if bulls.iloc[-1] > bears.iloc[-1]:
             score += 2
             details.append("Trend UP")
 
-        if bulls_h.iloc[-1] > bears_h.iloc[-1]:
-            score += 1
-            details.append("Momentum UP")
-
-        last3 = df_d.tail(3)
+        # Son 3 mum
+        last3 = df.tail(3)
         candles = ["🟢" if r["Close"] > r["Open"] else "🔴" for i,r in last3.iterrows()]
         pattern = "".join(candles)
 
@@ -91,19 +96,29 @@ def analyze(symbol):
             score += 1
             details.append("Bull candles")
 
-        vol_ma = df_d["Volume"].rolling(20).mean().iloc[-1]
-        if vol_ma and last_d["Volume"] / vol_ma > 1.2:
+        # Hacim (skor için)
+        vol_ma = df["Volume"].rolling(20).mean().iloc[-1]
+        if vol_ma and last["Volume"] / vol_ma > 1.2:
             score += 1
             details.append("Volume up")
 
-        if score >= 4:
+        # =========================
+        # RVOL (INFO ONLY)
+        # =========================
+        if vol_ma and vol_ma != 0:
+            rvol = last["Volume"] / vol_ma
+        else:
+            rvol = 0
+
+        # Aksiyon
+        if score >= 3:
             action = "🔥 AL"
-        elif score == 3:
+        elif score == 2:
             action = "⚠️ İZLE"
         else:
             action = "❌ PAS"
 
-        price = last_d["Close"]
+        price = last["Close"]
         if pd.isna(price):
             price = 0
 
@@ -113,20 +128,23 @@ def analyze(symbol):
             "price": round(float(price),2),
             "pattern": pattern,
             "action": action,
+            "rvol": round(float(rvol),2),
             "details": details
         }
 
-    except Exception as e:
-        print("ERROR:", symbol, e)
+    except:
         return None
 
+# =========================
+# LOOP
+# =========================
 def update():
     global signals
     while True:
         temp = []
         symbols = get_symbols()
 
-        with ThreadPoolExecutor(max_workers=8) as ex:
+        with ThreadPoolExecutor(max_workers=10) as ex:
             results = ex.map(analyze, symbols)
 
         for r in results:
@@ -134,10 +152,13 @@ def update():
                 temp.append(r)
 
         signals = sorted(temp, key=lambda x: x["score"], reverse=True)
-        time.sleep(300)
+        time.sleep(600)  # 10 dk
 
 threading.Thread(target=update, daemon=True).start()
 
+# =========================
+# UI
+# =========================
 HTML = """
 <html>
 <head>
@@ -149,13 +170,14 @@ body{background:#111;color:white;font-family:Arial}
 </head>
 <body>
 
-<h2>📊 FULL BIST TRADE SCANNER</h2>
+<h2>📊 FULL BIST SCANNER (OPTIMIZED)</h2>
 
 {% for s in signals %}
 <div class="card">
 <b>{{s.symbol}}</b> - {{s.action}}<br>
 Price: {{s.price}}<br>
-Score: {{s.score}} / 5<br>
+RVOL: {{s.rvol}}<br>
+Score: {{s.score}} / 4<br>
 Pattern: {{s.pattern}}<br>
 
 {% for d in s.details %}
