@@ -7,6 +7,8 @@ from concurrent.futures import ThreadPoolExecutor
 app = Flask(__name__)
 signals = []
 
+DEBUG = True  # False yaparsan log kapatılır
+
 # =========================
 # FULL BIST
 # =========================
@@ -37,7 +39,7 @@ def get_symbols():
         ]
 
 # =========================
-# ASO (PINE -> PYTHON)
+# ASO
 # =========================
 def calculate_aso(df, length=10):
     high = df["High"]
@@ -72,7 +74,12 @@ def analyze(symbol):
     try:
         df = yf.download(symbol, period="3mo", interval="1d", progress=False)
 
-        if df is None or len(df) < 20:
+        if df is None or len(df) < 25:
+            return None
+
+        df = df.dropna()
+
+        if len(df) < 20:
             return None
 
         bulls, bears = calculate_aso(df)
@@ -83,34 +90,44 @@ def analyze(symbol):
         details = []
 
         # ASO
-        if bulls.iloc[-1] > bears.iloc[-1]:
-            score += 2
-            details.append("Trend UP")
+        bull = bulls.iloc[-1]
+        bear = bears.iloc[-1]
 
-        # Son 3 mum
+        if pd.notna(bull) and pd.notna(bear):
+            if bull > bear:
+                score += 2
+                details.append("Trend UP")
+
+        # SON 3 MUM
         last3 = df.tail(3)
-        candles = ["🟢" if r["Close"] > r["Open"] else "🔴" for i,r in last3.iterrows()]
+        candles = ["🟢" if r["Close"] > r["Open"] else "🔴" for _, r in last3.iterrows()]
         pattern = "".join(candles)
 
         if candles.count("🟢") >= 2:
             score += 1
             details.append("Bull candles")
 
-        # Hacim (skor için)
+        # HACİM
         vol_ma = df["Volume"].rolling(20).mean().iloc[-1]
-        if vol_ma and last["Volume"] / vol_ma > 1.2:
-            score += 1
-            details.append("Volume up")
 
-        # =========================
-        # RVOL (INFO ONLY)
-        # =========================
-        if vol_ma and vol_ma != 0:
-            rvol = last["Volume"] / vol_ma
+        if pd.notna(vol_ma) and vol_ma > 0:
+            vol_ratio = last["Volume"] / vol_ma
+
+            if vol_ratio > 1.2:
+                score += 1
+                details.append("Volume up")
         else:
-            rvol = 0
+            vol_ratio = 0
 
-        # Aksiyon
+        # RVOL (INFO)
+        rvol = vol_ratio
+
+        # SCORE GARANTİ
+        if score == 0:
+            score = 1
+            details.append("Min score")
+
+        # AKSİYON
         if score >= 3:
             action = "🔥 AL"
         elif score == 2:
@@ -122,6 +139,9 @@ def analyze(symbol):
         if pd.isna(price):
             price = 0
 
+        if DEBUG:
+            print(symbol, "Score:", score, "RVOL:", round(rvol,2))
+
         return {
             "symbol": symbol,
             "score": score,
@@ -132,7 +152,9 @@ def analyze(symbol):
             "details": details
         }
 
-    except:
+    except Exception as e:
+        if DEBUG:
+            print("ERROR:", symbol, e)
         return None
 
 # =========================
@@ -144,6 +166,9 @@ def update():
         temp = []
         symbols = get_symbols()
 
+        if DEBUG:
+            print("Scanning:", len(symbols), "stocks")
+
         with ThreadPoolExecutor(max_workers=10) as ex:
             results = ex.map(analyze, symbols)
 
@@ -151,8 +176,20 @@ def update():
             if r:
                 temp.append(r)
 
-        signals = sorted(temp, key=lambda x: x["score"], reverse=True)
-        time.sleep(600)  # 10 dk
+        # EN AZ 10 GÖSTER GARANTİ
+        temp = sorted(temp, key=lambda x: x["score"], reverse=True)
+
+        if len(temp) < 10:
+            temp = temp[:len(temp)]
+        else:
+            temp = temp[:30]
+
+        signals = temp
+
+        if DEBUG:
+            print("Top signals:", len(signals))
+
+        time.sleep(600)
 
 threading.Thread(target=update, daemon=True).start()
 
@@ -170,7 +207,7 @@ body{background:#111;color:white;font-family:Arial}
 </head>
 <body>
 
-<h2>📊 FULL BIST SCANNER (OPTIMIZED)</h2>
+<h2>📊 BIST AI SCANNER (DEBUG MODE)</h2>
 
 {% for s in signals %}
 <div class="card">
