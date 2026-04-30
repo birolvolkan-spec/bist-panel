@@ -7,9 +7,6 @@ from concurrent.futures import ThreadPoolExecutor
 app = Flask(__name__)
 signals = []
 
-# =========================
-# FULL BIST (fallback dahil)
-# =========================
 def get_symbols():
     try:
         url = "https://tr.wikipedia.org/wiki/Borsa_%C4%B0stanbul"
@@ -25,7 +22,8 @@ def get_symbols():
         symbols = list(set(symbols))
 
         if len(symbols) < 50:
-            raise:
+            raise Exception("fallback")
+
         return symbols
 
     except:
@@ -35,9 +33,6 @@ def get_symbols():
             "YKBNK.IS","PETKM.IS","PGSUS.IS","TCELL.IS","ULKER.IS"
         ]
 
-# =========================
-# ASO
-# =========================
 def calculate_aso(df, length=10):
     high = df["High"]
     low = df["Low"]
@@ -64,15 +59,12 @@ def calculate_aso(df, length=10):
 
     return bulls.rolling(length).mean(), bears.rolling(length).mean()
 
-# =========================
-# ANALYZE
-# =========================
 def analyze(symbol):
     try:
         df_d = yf.download(symbol, period="3mo", interval="1d", progress=False)
         df_h = yf.download(symbol, period="7d", interval="1h", progress=False)
 
-        if len(df_d) < 20 or len(df_h) < 20:
+        if df_d is None or df_h is None or len(df_d) < 20 or len(df_h) < 20:
             return None
 
         bulls_d, bears_d = calculate_aso(df_d)
@@ -83,17 +75,14 @@ def analyze(symbol):
         score = 0
         details = []
 
-        # 1D trend
         if bulls_d.iloc[-1] > bears_d.iloc[-1]:
             score += 2
             details.append("Trend UP")
 
-        # 1H momentum
         if bulls_h.iloc[-1] > bears_h.iloc[-1]:
             score += 1
             details.append("Momentum UP")
 
-        # son 3 mum
         last3 = df_d.tail(3)
         candles = ["🟢" if r["Close"] > r["Open"] else "🔴" for i,r in last3.iterrows()]
         pattern = "".join(candles)
@@ -102,13 +91,11 @@ def analyze(symbol):
             score += 1
             details.append("Bull candles")
 
-        # hacim
-        vol_ratio = last_d["Volume"] / df_d["Volume"].rolling(20).mean().iloc[-1]
-        if vol_ratio > 1.2:
+        vol_ma = df_d["Volume"].rolling(20).mean().iloc[-1]
+        if vol_ma and last_d["Volume"] / vol_ma > 1.2:
             score += 1
             details.append("Volume up")
 
-        # aksiyon
         if score >= 4:
             action = "🔥 AL"
         elif score == 3:
@@ -116,21 +103,23 @@ def analyze(symbol):
         else:
             action = "❌ PAS"
 
+        price = last_d["Close"]
+        if pd.isna(price):
+            price = 0
+
         return {
             "symbol": symbol,
             "score": score,
-            "price": round(last_d["Close"],2),
+            "price": round(float(price),2),
             "pattern": pattern,
             "action": action,
             "details": details
         }
 
-    except:
+    except Exception as e:
+        print("ERROR:", symbol, e)
         return None
 
-# =========================
-# LOOP
-# =========================
 def update():
     global signals
     while True:
@@ -149,9 +138,6 @@ def update():
 
 threading.Thread(target=update, daemon=True).start()
 
-# =========================
-# UI
-# =========================
 HTML = """
 <html>
 <head>
