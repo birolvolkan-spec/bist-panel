@@ -1,3 +1,12 @@
+function fmtMetricValue(value, suffix = '') {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) return '-';
+  return Number(value).toLocaleString('tr-TR', { maximumFractionDigits: 4 }) + suffix;
+}
+
+function metricBox(label, value, suffix = '') {
+  return `<div><span>${label}</span><strong>${fmtMetricValue(value, suffix)}</strong></div>`;
+}
+
 async function loadTradeRecommendations() {
   try {
     const res = await fetch('data/daily_report.json?v=' + Date.now(), { cache: 'no-store' });
@@ -15,7 +24,18 @@ async function loadTradeRecommendations() {
     }
 
     const candidates = rec.top_candidates || [];
-    const cards = candidates.length ? candidates.map(c => `
+    const cards = candidates.length ? candidates.map(c => {
+      const m = c.futures_metrics || {};
+      const metricGrid = `
+        <div class="levels">
+          ${metricBox('Fiyat değişim', c.price_change_pct, '%')}
+          ${metricBox('BTC fark', c.relative_to_btc_pct, ' puan')}
+          ${metricBox('Delta', m.last_delta_ratio_pct, '%')}
+          ${metricBox('Taker A/S', m.taker_buy_sell_ratio, '')}
+          ${metricBox('OI değişim', m.open_interest_change_pct, '%')}
+          ${metricBox('Funding', m.funding_rate_pct, '%')}
+        </div>`;
+      return `
       <article class="card">
         <div class="assetHead">
           <div>
@@ -30,11 +50,13 @@ async function loadTradeRecommendations() {
           <div><span>Giriş TF</span><strong>${c.entry_tf}</strong></div>
           <div><span>Tip</span><strong>${c.style}</strong></div>
         </div>
+        <div class="comment"><strong>Oranlar / Metrikler</strong></div>
+        ${metricGrid}
         <div class="comment"><strong>Giriş planı:</strong> ${c.entry_plan}</div>
         <div class="comment small"><strong>Geçersiz olur:</strong> ${c.invalid_if}</div>
         <div class="comment small"><strong>Neden?</strong><br>${(c.reasons || []).map(r => '• ' + r).join('<br>')}</div>
-      </article>
-    `).join('') : '<div class="card"><h3>NO TRADE</h3><p>Temiz işlem adayı çıkmadı. Sistem pas geçmeyi öneriyor.</p></div>';
+      </article>`;
+    }).join('') : '<div class="card"><h3>NO TRADE</h3><p>Temiz işlem adayı çıkmadı. Sistem pas geçmeyi öneriyor.</p></div>';
 
     section.innerHTML = `
       <div class="sectionTitle">
@@ -45,7 +67,7 @@ async function loadTradeRecommendations() {
         <p class="eyebrow">Piyasa Rejimi</p>
         <h2>${rec.market_regime?.regime || '-'}</h2>
         <p>${rec.summary || ''}</p>
-        <p class="muted">Eksik veri: ${(rec.market_regime?.missing_data || []).join(', ')}</p>
+        <p class="muted">Eksik veri: ${(rec.market_regime?.missing_data || []).join(', ') || 'Yok'}</p>
       </div>
       <div class="assetGrid">${cards}</div>
     `;
