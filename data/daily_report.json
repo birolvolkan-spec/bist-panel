@@ -1,6 +1,44 @@
 {
   "report_date": "2026-06-25",
-  "updated_at": "14:04 Türkiye saati",
+  "updated_at": "14:50 Türkiye saati",
+  "data_layer": {
+    "crypto_source": "Binance USD-M Futures public data",
+    "macro_source": "Yahoo Finance + CoinGecko global",
+    "included_crypto_symbols": [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "BNBUSDT",
+      "XRPUSDT",
+      "ADAUSDT",
+      "DOGEUSDT",
+      "AVAXUSDT",
+      "LINKUSDT",
+      "DOTUSDT",
+      "LTCUSDT",
+      "ARBUSDT",
+      "OPUSDT",
+      "NEARUSDT",
+      "APTUSDT"
+    ],
+    "included_macro": [
+      "DXY",
+      "TOTAL",
+      "TOTAL2",
+      "TOTAL3",
+      "BTC Dominance",
+      "ETH Dominance",
+      "USDT.D"
+    ],
+    "included_futures_metrics": [
+      "funding",
+      "open_interest",
+      "open_interest_change",
+      "taker_buy_sell_ratio",
+      "candle_delta",
+      "delta_ratio"
+    ]
+  },
   "daily_decision": {
     "title": "🔴 Korunmacı kal",
     "risk": "YÜKSEK",
@@ -10,875 +48,291 @@
     "title": "Haftalık izleme özeti",
     "summary": "Pazartesi günleri haftalık yön, güçlenenler ve zayıflayanlar özetlenir. Diğer günlerde haftanın mevcut izleme durumu gösterilir.",
     "items": [
-      "Kripto ortalama: 0.30%",
-      "BIST öncelik ortalama: -1.53%",
-      "BIST detay verisi yoksa açıkça sınırlı veri yazılır"
+      "Kripto ortalama: 0.00%",
+      "BIST öncelik ortalama: -2.37%",
+      "Delta/OI/Funding verisi coin öneri motoruna aktarılır"
     ]
   },
   "macro": [
     {
       "name": "DXY",
-      "change_pct": 0.061,
-      "note": "DXY net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru."
+      "change_pct": 0.1201,
+      "note": "DXY net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
+      "value": 101.732,
+      "data_ready": true
     },
     {
       "name": "BIST 100",
-      "change_pct": 0.5391,
-      "note": "BIST 100 net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru."
+      "change_pct": 0.0791,
+      "note": "BIST 100 net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
+      "value": 14342.54,
+      "data_ready": true
+    },
+    {
+      "name": "TOTAL",
+      "change_pct": -2.1629,
+      "note": "Toplam kripto piyasa değeri yaklaşık 2,190,166,159,130.03 USD.",
+      "value": 2190166159130.03,
+      "data_ready": true
+    },
+    {
+      "name": "TOTAL2",
+      "change_pct": -2.1629,
+      "note": "BTC hariç piyasa değeri yaklaşık 961,842,131,108.18 USD. Altcoin geniş piyasa gücü için izlenir.",
+      "value": 961842131108.18,
+      "data_ready": true
+    },
+    {
+      "name": "TOTAL3",
+      "change_pct": -2.1629,
+      "note": "BTC ve ETH hariç piyasa değeri yaklaşık 764,992,186,891.73 USD. Altcoin risk iştahı için ana filtredir.",
+      "value": 764992186891.73,
+      "data_ready": true
     },
     {
       "name": "BTC Dominance",
       "change_pct": null,
-      "note": "BTC piyasa payı yaklaşık %56.0368. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir."
+      "note": "BTC piyasa payı yaklaşık %56.0836. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir.",
+      "value": 56.0836,
+      "data_ready": true
     },
     {
       "name": "ETH Dominance",
       "change_pct": null,
-      "note": "ETH piyasa payı yaklaşık %9.009. Altcoin iştahı için izlenir."
+      "note": "ETH piyasa payı yaklaşık %8.9879. Altcoin iştahı için izlenir.",
+      "value": 8.9879,
+      "data_ready": true
     },
     {
-      "name": "Kripto toplam piyasa",
-      "change_pct": -2.1808,
-      "note": "Toplam piyasa değeri 24 saatlik değişime göre yorumlanır."
+      "name": "USDT.D",
+      "change_pct": null,
+      "note": "USDT piyasa payı yaklaşık %8.4954. Yükseliş riskten kaçışı, düşüş risk iştahını gösterebilir.",
+      "value": 8.4954,
+      "data_ready": true
     }
   ],
   "comparison": [
     {
       "name": "Kripto ortalama",
-      "change_pct": 0.3029,
-      "note": "BTC, ETH, SOL, BNB ve OP ortalama değişimi."
+      "change_pct": 0.0,
+      "note": "15 Binance Futures coin ortalama değişimi."
     },
     {
       "name": "BIST öncelikli ortalama",
-      "change_pct": -1.5288,
+      "change_pct": -2.3661,
       "note": "SASA, ZOREN ve HEKTAŞ takip listesinin ortalama değişimi."
     }
   ],
   "crypto": [
     {
       "name": "Bitcoin",
-      "symbol": "BTC-USD",
+      "symbol": "BTCUSDT",
       "currency": " $",
-      "last_price": 61077.5703,
-      "change_pct": 0.1352,
-      "support": 60867.4141,
-      "resistance": 66289.5,
-      "volume_status": "Artıyor",
-      "trend": "Kararsız",
-      "comment": "Bitcoin net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru.",
-      "compare": "Önceki rapora göre fiyat değişimi -0.92%.",
-      "history": [
-        {
-          "date": "2026-05-27",
-          "close": 74344.7031,
-          "volume": 33802172927.0
-        },
-        {
-          "date": "2026-05-28",
-          "close": 73536.5547,
-          "volume": 40148145327.0
-        },
-        {
-          "date": "2026-05-29",
-          "close": 73372.5234,
-          "volume": 34457929250.0
-        },
-        {
-          "date": "2026-05-30",
-          "close": 73754.8359,
-          "volume": 19563589191.0
-        },
-        {
-          "date": "2026-05-31",
-          "close": 73579.6875,
-          "volume": 17445435650.0
-        },
-        {
-          "date": "2026-06-01",
-          "close": 71319.7734,
-          "volume": 43378836121.0
-        },
-        {
-          "date": "2026-06-02",
-          "close": 66703.6562,
-          "volume": 54990073882.0
-        },
-        {
-          "date": "2026-06-03",
-          "close": 64014.3672,
-          "volume": 47411556213.0
-        },
-        {
-          "date": "2026-06-04",
-          "close": 63801.5742,
-          "volume": 63800151780.0
-        },
-        {
-          "date": "2026-06-05",
-          "close": 60922.668,
-          "volume": 71465606706.0
-        },
-        {
-          "date": "2026-06-06",
-          "close": 60867.4141,
-          "volume": 30898464957.0
-        },
-        {
-          "date": "2026-06-07",
-          "close": 63239.5195,
-          "volume": 36006496194.0
-        },
-        {
-          "date": "2026-06-08",
-          "close": 63090.5898,
-          "volume": 34133252457.0
-        },
-        {
-          "date": "2026-06-09",
-          "close": 61643.7812,
-          "volume": 40144449754.0
-        },
-        {
-          "date": "2026-06-10",
-          "close": 61449.2891,
-          "volume": 27493506779.0
-        },
-        {
-          "date": "2026-06-11",
-          "close": 63561.0547,
-          "volume": 29316677897.0
-        },
-        {
-          "date": "2026-06-12",
-          "close": 63543.1992,
-          "volume": 26881868307.0
-        },
-        {
-          "date": "2026-06-13",
-          "close": 64421.3242,
-          "volume": 16956245530.0
-        },
-        {
-          "date": "2026-06-14",
-          "close": 65710.3984,
-          "volume": 21572226975.0
-        },
-        {
-          "date": "2026-06-15",
-          "close": 66289.5,
-          "volume": 32927321950.0
-        },
-        {
-          "date": "2026-06-16",
-          "close": 65600.6406,
-          "volume": 25063963967.0
-        },
-        {
-          "date": "2026-06-17",
-          "close": 64418.4453,
-          "volume": 31288885189.0
-        },
-        {
-          "date": "2026-06-18",
-          "close": 62896.4727,
-          "volume": 30432454936.0
-        },
-        {
-          "date": "2026-06-19",
-          "close": 63540.8359,
-          "volume": 22361931660.0
-        },
-        {
-          "date": "2026-06-20",
-          "close": 64239.6758,
-          "volume": 17486384117.0
-        },
-        {
-          "date": "2026-06-21",
-          "close": 63237.5391,
-          "volume": 15739619591.0
-        },
-        {
-          "date": "2026-06-22",
-          "close": 63952.1055,
-          "volume": 26561496819.0
-        },
-        {
-          "date": "2026-06-23",
-          "close": 62668.0195,
-          "volume": 29608942370.0
-        },
-        {
-          "date": "2026-06-24",
-          "close": 60995.1328,
-          "volume": 42644106535.0
-        },
-        {
-          "date": "2026-06-25",
-          "close": 61077.5703,
-          "volume": 44623183872.0
-        }
-      ]
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
     },
     {
       "name": "Ethereum",
-      "symbol": "ETH-USD",
+      "symbol": "ETHUSDT",
       "currency": " $",
-      "last_price": 1631.34,
-      "change_pct": 0.7047,
-      "support": 1568.7677,
-      "resistance": 1794.9612,
-      "volume_status": "Artıyor",
-      "trend": "Kararsız",
-      "comment": "Ethereum net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru.",
-      "compare": "Önceki rapora göre fiyat değişimi -0.89%.",
-      "history": [
-        {
-          "date": "2026-05-27",
-          "close": 2022.1982,
-          "volume": 14534289020.0
-        },
-        {
-          "date": "2026-05-28",
-          "close": 2007.5527,
-          "volume": 18109844096.0
-        },
-        {
-          "date": "2026-05-29",
-          "close": 2011.9785,
-          "volume": 14941194039.0
-        },
-        {
-          "date": "2026-05-30",
-          "close": 2019.4583,
-          "volume": 7478416074.0
-        },
-        {
-          "date": "2026-05-31",
-          "close": 2004.3416,
-          "volume": 9253505209.0
-        },
-        {
-          "date": "2026-06-01",
-          "close": 2003.2212,
-          "volume": 19458810001.0
-        },
-        {
-          "date": "2026-06-02",
-          "close": 1857.7163,
-          "volume": 25205401403.0
-        },
-        {
-          "date": "2026-06-03",
-          "close": 1811.7323,
-          "volume": 24083350214.0
-        },
-        {
-          "date": "2026-06-04",
-          "close": 1769.5806,
-          "volume": 27112623897.0
-        },
-        {
-          "date": "2026-06-05",
-          "close": 1580.8608,
-          "volume": 39924177669.0
-        },
-        {
-          "date": "2026-06-06",
-          "close": 1568.7677,
-          "volume": 18426248218.0
-        },
-        {
-          "date": "2026-06-07",
-          "close": 1686.3962,
-          "volume": 15172606860.0
-        },
-        {
-          "date": "2026-06-08",
-          "close": 1690.1486,
-          "volume": 17427269148.0
-        },
-        {
-          "date": "2026-06-09",
-          "close": 1637.7067,
-          "volume": 15196855528.0
-        },
-        {
-          "date": "2026-06-10",
-          "close": 1620.1377,
-          "volume": 12655731412.0
-        },
-        {
-          "date": "2026-06-11",
-          "close": 1672.2806,
-          "volume": 12379882531.0
-        },
-        {
-          "date": "2026-06-12",
-          "close": 1665.1278,
-          "volume": 9989137815.0
-        },
-        {
-          "date": "2026-06-13",
-          "close": 1680.2146,
-          "volume": 6101094488.0
-        },
-        {
-          "date": "2026-06-14",
-          "close": 1724.6133,
-          "volume": 7804982667.0
-        },
-        {
-          "date": "2026-06-15",
-          "close": 1794.9612,
-          "volume": 17921331594.0
-        },
-        {
-          "date": "2026-06-16",
-          "close": 1790.3982,
-          "volume": 14698492893.0
-        },
-        {
-          "date": "2026-06-17",
-          "close": 1747.8855,
-          "volume": 14185457929.0
-        },
-        {
-          "date": "2026-06-18",
-          "close": 1709.5334,
-          "volume": 12942260783.0
-        },
-        {
-          "date": "2026-06-19",
-          "close": 1710.9824,
-          "volume": 7855725190.0
-        },
-        {
-          "date": "2026-06-20",
-          "close": 1739.3014,
-          "volume": 7773536600.0
-        },
-        {
-          "date": "2026-06-21",
-          "close": 1704.5806,
-          "volume": 8498711726.0
-        },
-        {
-          "date": "2026-06-22",
-          "close": 1726.5109,
-          "volume": 13584368622.0
-        },
-        {
-          "date": "2026-06-23",
-          "close": 1665.4368,
-          "volume": 10431438278.0
-        },
-        {
-          "date": "2026-06-24",
-          "close": 1619.9249,
-          "volume": 14059894232.0
-        },
-        {
-          "date": "2026-06-25",
-          "close": 1631.34,
-          "volume": 16112357376.0
-        }
-      ]
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
     },
     {
       "name": "Solana",
-      "symbol": "SOL-USD",
+      "symbol": "SOLUSDT",
       "currency": " $",
-      "last_price": 68.07,
-      "change_pct": 0.1287,
-      "support": 62.1898,
-      "resistance": 73.9793,
-      "volume_status": "Artıyor",
-      "trend": "Güçleniyor",
-      "comment": "Solana net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru.",
-      "compare": "Önceki rapora göre fiyat değişimi -0.99%.",
-      "history": [
-        {
-          "date": "2026-05-27",
-          "close": 82.3681,
-          "volume": 3313099113.0
-        },
-        {
-          "date": "2026-05-28",
-          "close": 81.9854,
-          "volume": 3669754717.0
-        },
-        {
-          "date": "2026-05-29",
-          "close": 81.9325,
-          "volume": 3340907091.0
-        },
-        {
-          "date": "2026-05-30",
-          "close": 82.5473,
-          "volume": 2257737109.0
-        },
-        {
-          "date": "2026-05-31",
-          "close": 82.2983,
-          "volume": 2207975455.0
-        },
-        {
-          "date": "2026-06-01",
-          "close": 81.087,
-          "volume": 3764320653.0
-        },
-        {
-          "date": "2026-06-02",
-          "close": 74.1429,
-          "volume": 4479904038.0
-        },
-        {
-          "date": "2026-06-03",
-          "close": 71.6124,
-          "volume": 4320073081.0
-        },
-        {
-          "date": "2026-06-04",
-          "close": 68.7189,
-          "volume": 5532042136.0
-        },
-        {
-          "date": "2026-06-05",
-          "close": 63.4869,
-          "volume": 6580342268.0
-        },
-        {
-          "date": "2026-06-06",
-          "close": 62.1898,
-          "volume": 3098233389.0
-        },
-        {
-          "date": "2026-06-07",
-          "close": 66.3106,
-          "volume": 2721563824.0
-        },
-        {
-          "date": "2026-06-08",
-          "close": 66.795,
-          "volume": 2829739169.0
-        },
-        {
-          "date": "2026-06-09",
-          "close": 64.9621,
-          "volume": 2794618813.0
-        },
-        {
-          "date": "2026-06-10",
-          "close": 63.161,
-          "volume": 2771122697.0
-        },
-        {
-          "date": "2026-06-11",
-          "close": 66.822,
-          "volume": 2584434257.0
-        },
-        {
-          "date": "2026-06-12",
-          "close": 66.7493,
-          "volume": 2496073408.0
-        },
-        {
-          "date": "2026-06-13",
-          "close": 68.8728,
-          "volume": 1473600629.0
-        },
-        {
-          "date": "2026-06-14",
-          "close": 71.1662,
-          "volume": 1618939393.0
-        },
-        {
-          "date": "2026-06-15",
-          "close": 73.9793,
-          "volume": 2855926507.0
-        },
-        {
-          "date": "2026-06-16",
-          "close": 73.4138,
-          "volume": 2180655774.0
-        },
-        {
-          "date": "2026-06-17",
-          "close": 71.931,
-          "volume": 2589799897.0
-        },
-        {
-          "date": "2026-06-18",
-          "close": 69.6265,
-          "volume": 2261568852.0
-        },
-        {
-          "date": "2026-06-19",
-          "close": 69.7206,
-          "volume": 1724372055.0
-        },
-        {
-          "date": "2026-06-20",
-          "close": 73.1727,
-          "volume": 2008492615.0
-        },
-        {
-          "date": "2026-06-21",
-          "close": 72.4182,
-          "volume": 1920143205.0
-        },
-        {
-          "date": "2026-06-22",
-          "close": 71.9082,
-          "volume": 2409081243.0
-        },
-        {
-          "date": "2026-06-23",
-          "close": 69.6437,
-          "volume": 2072312842.0
-        },
-        {
-          "date": "2026-06-24",
-          "close": 67.9825,
-          "volume": 3271251788.0
-        },
-        {
-          "date": "2026-06-25",
-          "close": 68.07,
-          "volume": 3390652672.0
-        }
-      ]
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
     },
     {
       "name": "BNB",
-      "symbol": "BNB-USD",
+      "symbol": "BNBUSDT",
       "currency": " $",
-      "last_price": 562.52,
-      "change_pct": -0.2219,
-      "support": 562.52,
-      "resistance": 617.4219,
-      "volume_status": "Artıyor",
-      "trend": "Zayıflıyor",
-      "comment": "BNB net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru.",
-      "compare": "Önceki rapora göre fiyat değişimi -0.95%.",
-      "history": [
-        {
-          "date": "2026-05-27",
-          "close": 648.1592,
-          "volume": 1299270396.0
-        },
-        {
-          "date": "2026-05-28",
-          "close": 637.4938,
-          "volume": 1387114881.0
-        },
-        {
-          "date": "2026-05-29",
-          "close": 642.2873,
-          "volume": 1229212667.0
-        },
-        {
-          "date": "2026-05-30",
-          "close": 717.9338,
-          "volume": 3590363740.0
-        },
-        {
-          "date": "2026-05-31",
-          "close": 708.5842,
-          "volume": 3011261654.0
-        },
-        {
-          "date": "2026-06-01",
-          "close": 692.1308,
-          "volume": 3603890086.0
-        },
-        {
-          "date": "2026-06-02",
-          "close": 650.43,
-          "volume": 2212967555.0
-        },
-        {
-          "date": "2026-06-03",
-          "close": 620.0994,
-          "volume": 2023083015.0
-        },
-        {
-          "date": "2026-06-04",
-          "close": 603.5347,
-          "volume": 2306830558.0
-        },
-        {
-          "date": "2026-06-05",
-          "close": 572.1069,
-          "volume": 2607132303.0
-        },
-        {
-          "date": "2026-06-06",
-          "close": 574.5108,
-          "volume": 1418745727.0
-        },
-        {
-          "date": "2026-06-07",
-          "close": 603.629,
-          "volume": 1355939748.0
-        },
-        {
-          "date": "2026-06-08",
-          "close": 601.6277,
-          "volume": 1157549571.0
-        },
-        {
-          "date": "2026-06-09",
-          "close": 592.8506,
-          "volume": 1187053835.0
-        },
-        {
-          "date": "2026-06-10",
-          "close": 586.1738,
-          "volume": 1017565363.0
-        },
-        {
-          "date": "2026-06-11",
-          "close": 605.0416,
-          "volume": 1095074108.0
-        },
-        {
-          "date": "2026-06-12",
-          "close": 603.5066,
-          "volume": 994015378.0
-        },
-        {
-          "date": "2026-06-13",
-          "close": 609.5438,
-          "volume": 821135662.0
-        },
-        {
-          "date": "2026-06-14",
-          "close": 616.0859,
-          "volume": 1036522794.0
-        },
-        {
-          "date": "2026-06-15",
-          "close": 617.4219,
-          "volume": 1343292765.0
-        },
-        {
-          "date": "2026-06-16",
-          "close": 604.3461,
-          "volume": 1347367138.0
-        },
-        {
-          "date": "2026-06-17",
-          "close": 600.9587,
-          "volume": 1281028503.0
-        },
-        {
-          "date": "2026-06-18",
-          "close": 578.0147,
-          "volume": 1125978611.0
-        },
-        {
-          "date": "2026-06-19",
-          "close": 581.1638,
-          "volume": 869522115.0
-        },
-        {
-          "date": "2026-06-20",
-          "close": 587.6139,
-          "volume": 828038134.0
-        },
-        {
-          "date": "2026-06-21",
-          "close": 583.7516,
-          "volume": 758751631.0
-        },
-        {
-          "date": "2026-06-22",
-          "close": 589.9187,
-          "volume": 989771505.0
-        },
-        {
-          "date": "2026-06-23",
-          "close": 577.5997,
-          "volume": 966075609.0
-        },
-        {
-          "date": "2026-06-24",
-          "close": 563.7708,
-          "volume": 1326402841.0
-        },
-        {
-          "date": "2026-06-25",
-          "close": 562.52,
-          "volume": 1432268928.0
-        }
-      ]
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "XRP",
+      "symbol": "XRPUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "Cardano",
+      "symbol": "ADAUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "Dogecoin",
+      "symbol": "DOGEUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "Avalanche",
+      "symbol": "AVAXUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "Chainlink",
+      "symbol": "LINKUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "Polkadot",
+      "symbol": "DOTUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "Litecoin",
+      "symbol": "LTCUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "Arbitrum",
+      "symbol": "ARBUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
     },
     {
       "name": "Optimism",
-      "symbol": "OP-USD",
+      "symbol": "OPUSDT",
       "currency": " $",
-      "last_price": 0.105,
-      "change_pct": 0.7678,
-      "support": 0.091,
-      "resistance": 0.1091,
-      "volume_status": "Artıyor",
-      "trend": "Güçleniyor",
-      "comment": "Optimism net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru.",
-      "compare": "Önceki rapora göre fiyat değişimi -1.87%.",
-      "history": [
-        {
-          "date": "2026-05-27",
-          "close": 0.1238,
-          "volume": 56881464.0
-        },
-        {
-          "date": "2026-05-28",
-          "close": 0.1187,
-          "volume": 75429747.0
-        },
-        {
-          "date": "2026-05-29",
-          "close": 0.1186,
-          "volume": 59709731.0
-        },
-        {
-          "date": "2026-05-30",
-          "close": 0.1201,
-          "volume": 41085773.0
-        },
-        {
-          "date": "2026-05-31",
-          "close": 0.1183,
-          "volume": 44288198.0
-        },
-        {
-          "date": "2026-06-01",
-          "close": 0.1236,
-          "volume": 67624597.0
-        },
-        {
-          "date": "2026-06-02",
-          "close": 0.1154,
-          "volume": 92420423.0
-        },
-        {
-          "date": "2026-06-03",
-          "close": 0.123,
-          "volume": 90519314.0
-        },
-        {
-          "date": "2026-06-04",
-          "close": 0.1119,
-          "volume": 117707600.0
-        },
-        {
-          "date": "2026-06-05",
-          "close": 0.0975,
-          "volume": 98605692.0
-        },
-        {
-          "date": "2026-06-06",
-          "close": 0.0937,
-          "volume": 55103323.0
-        },
-        {
-          "date": "2026-06-07",
-          "close": 0.097,
-          "volume": 59494484.0
-        },
-        {
-          "date": "2026-06-08",
-          "close": 0.0958,
-          "volume": 51444492.0
-        },
-        {
-          "date": "2026-06-09",
-          "close": 0.0968,
-          "volume": 48435083.0
-        },
-        {
-          "date": "2026-06-10",
-          "close": 0.091,
-          "volume": 54777784.0
-        },
-        {
-          "date": "2026-06-11",
-          "close": 0.0951,
-          "volume": 45161080.0
-        },
-        {
-          "date": "2026-06-12",
-          "close": 0.0996,
-          "volume": 47511433.0
-        },
-        {
-          "date": "2026-06-13",
-          "close": 0.1071,
-          "volume": 75309663.0
-        },
-        {
-          "date": "2026-06-14",
-          "close": 0.1085,
-          "volume": 45482928.0
-        },
-        {
-          "date": "2026-06-15",
-          "close": 0.1086,
-          "volume": 52416722.0
-        },
-        {
-          "date": "2026-06-16",
-          "close": 0.1088,
-          "volume": 42893753.0
-        },
-        {
-          "date": "2026-06-17",
-          "close": 0.1086,
-          "volume": 53000568.0
-        },
-        {
-          "date": "2026-06-18",
-          "close": 0.1091,
-          "volume": 57997448.0
-        },
-        {
-          "date": "2026-06-19",
-          "close": 0.1035,
-          "volume": 48148989.0
-        },
-        {
-          "date": "2026-06-20",
-          "close": 0.1035,
-          "volume": 41109994.0
-        },
-        {
-          "date": "2026-06-21",
-          "close": 0.0995,
-          "volume": 29600236.0
-        },
-        {
-          "date": "2026-06-22",
-          "close": 0.1006,
-          "volume": 40743769.0
-        },
-        {
-          "date": "2026-06-23",
-          "close": 0.1012,
-          "volume": 39114447.0
-        },
-        {
-          "date": "2026-06-24",
-          "close": 0.1042,
-          "volume": 69796775.0
-        },
-        {
-          "date": "2026-06-25",
-          "close": 0.105,
-          "volume": 74732280.0
-        }
-      ]
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "NEAR",
+      "symbol": "NEARUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
+    },
+    {
+      "name": "Aptos",
+      "symbol": "APTUSDT",
+      "currency": " $",
+      "last_price": null,
+      "change_pct": null,
+      "support": null,
+      "resistance": null,
+      "volume_status": "Veri sınırlı",
+      "trend": "Veri sınırlı",
+      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+      "history": []
     }
   ],
   "commodities": [
@@ -886,14 +340,14 @@
       "name": "Altın",
       "symbol": "GC=F",
       "currency": " $",
-      "last_price": 3997.8,
-      "change_pct": 0.188,
+      "last_price": 3997.6001,
+      "change_pct": 0.1829,
       "support": 3990.3,
       "resistance": 4560.5,
       "volume_status": "Artıyor",
       "trend": "Kararsız",
-      "comment": "Altın net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru.",
-      "compare": "Önceki rapora göre fiyat değişimi -0.22%.",
+      "comment": "Altın net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
+      "compare": "Düne göre değişim +0.18%.",
       "history": [
         {
           "date": "2026-05-13",
@@ -1042,8 +496,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 3997.8,
-          "volume": 54504.0
+          "close": 3997.6001,
+          "volume": 57489.0
         }
       ]
     },
@@ -1051,14 +505,14 @@
       "name": "Brent Petrol",
       "symbol": "BZ=F",
       "currency": " $",
-      "last_price": 73.1,
-      "change_pct": -0.8679,
-      "support": 73.1,
+      "last_price": 73.29,
+      "change_pct": -0.6103,
+      "support": 73.29,
       "resistance": 97.81,
       "volume_status": "Zayıf",
       "trend": "Zayıflıyor",
-      "comment": "Brent Petrol net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru.",
-      "compare": "Önceki rapora göre fiyat değişimi +0.27%.",
+      "comment": "Brent Petrol net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
+      "compare": "Düne göre değişim -0.61%.",
       "history": [
         {
           "date": "2026-05-13",
@@ -1207,8 +661,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 73.1,
-          "volume": 10286.0
+          "close": 73.29,
+          "volume": 11750.0
         }
       ]
     }
@@ -1218,14 +672,14 @@
       "name": "SASA",
       "symbol": "SASA.IS",
       "currency": " ₺",
-      "last_price": 2.55,
-      "change_pct": 0.3937,
+      "last_price": 2.53,
+      "change_pct": -0.3937,
       "support": 2.49,
       "resistance": 2.78,
       "volume_status": "Artıyor",
-      "trend": "Güçleniyor",
-      "comment": "SASA net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru.",
-      "compare": "Önceki rapora göre fiyat değişimi -0.78%.",
+      "trend": "Kararsız",
+      "comment": "SASA net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
+      "compare": "Düne göre değişim -0.39%.",
       "history": [
         {
           "date": "2026-05-14",
@@ -1374,8 +828,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 2.55,
-          "volume": 842350245.0
+          "close": 2.53,
+          "volume": 1035547019.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -1384,14 +838,14 @@
       "name": "ZOREN",
       "symbol": "ZOREN.IS",
       "currency": " ₺",
-      "last_price": 2.78,
-      "change_pct": -1.4184,
-      "support": 2.78,
+      "last_price": 2.77,
+      "change_pct": -1.773,
+      "support": 2.77,
       "resistance": 3.14,
       "volume_status": "Zayıf",
       "trend": "Zayıflıyor",
-      "comment": "ZOREN tarafında satış baskısı var. Destek kaybı olursa risk artar; tepki için hacim teyidi gerekir.",
-      "compare": "Önceki rapora göre fiyat değişimi -1.07%.",
+      "comment": "ZOREN tarafında satış baskısı var. Destek kaybı risk artırır.",
+      "compare": "Düne göre değişim -1.77%.",
       "history": [
         {
           "date": "2026-05-14",
@@ -1540,8 +994,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 2.78,
-          "volume": 22757315.0
+          "close": 2.77,
+          "volume": 24370060.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -1550,14 +1004,14 @@
       "name": "HEKTAŞ",
       "symbol": "HEKTS.IS",
       "currency": " ₺",
-      "last_price": 3.52,
-      "change_pct": -3.5616,
-      "support": 3.52,
+      "last_price": 3.47,
+      "change_pct": -4.9315,
+      "support": 3.47,
       "resistance": 4.43,
       "volume_status": "Artıyor",
       "trend": "Zayıflıyor",
-      "comment": "HEKTAŞ tarafında satış baskısı var. Destek kaybı olursa risk artar; tepki için hacim teyidi gerekir.",
-      "compare": "Önceki rapora göre fiyat değişimi +0.00%.",
+      "comment": "HEKTAŞ tarafında satış baskısı var. Destek kaybı risk artırır.",
+      "compare": "Düne göre değişim -4.93%.",
       "history": [
         {
           "date": "2026-05-14",
@@ -1706,8 +1160,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 3.52,
-          "volume": 954484004.0
+          "close": 3.47,
+          "volume": 1055034541.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -1715,29 +1169,39 @@
   ],
   "opportunities": [
     {
-      "name": "Optimism",
-      "change_pct": 0.7678,
-      "note": "Trend: Güçleniyor. Hacim: Artıyor."
-    },
-    {
-      "name": "Ethereum",
-      "change_pct": 0.7047,
+      "name": "SASA",
+      "change_pct": -0.3937,
       "note": "Trend: Kararsız. Hacim: Artıyor."
     },
     {
-      "name": "SASA",
-      "change_pct": 0.3937,
-      "note": "Trend: Güçleniyor. Hacim: Artıyor."
+      "name": "ZOREN",
+      "change_pct": -1.773,
+      "note": "Trend: Zayıflıyor. Hacim: Zayıf."
+    },
+    {
+      "name": "HEKTAŞ",
+      "change_pct": -4.9315,
+      "note": "Trend: Zayıflıyor. Hacim: Artıyor."
     },
     {
       "name": "Bitcoin",
-      "change_pct": 0.1352,
-      "note": "Trend: Kararsız. Hacim: Artıyor."
+      "change_pct": null,
+      "note": "Trend: Veri sınırlı. Hacim: Veri sınırlı."
+    },
+    {
+      "name": "Ethereum",
+      "change_pct": null,
+      "note": "Trend: Veri sınırlı. Hacim: Veri sınırlı."
     },
     {
       "name": "Solana",
-      "change_pct": 0.1287,
-      "note": "Trend: Güçleniyor. Hacim: Artıyor."
+      "change_pct": null,
+      "note": "Trend: Veri sınırlı. Hacim: Veri sınırlı."
+    },
+    {
+      "name": "BNB",
+      "change_pct": null,
+      "note": "Trend: Veri sınırlı. Hacim: Veri sınırlı."
     }
   ],
   "funds": [
@@ -1750,11 +1214,11 @@
   "trade_recommendations": {
     "engine_version": "v1.0",
     "market_regime": {
-      "regime": "SHORT ağırlıklı / risk-off",
-      "direction_bias": "SHORT",
+      "regime": "Kararsız / seçici",
+      "direction_bias": "MIXED",
       "risk_on_score": 5,
-      "risk_off_score": 30,
-      "summary": "Makro tablo temkinli. DXY ve toplam piyasa zayıflığı short adaylarını öne çıkarabilir.",
+      "risk_off_score": 5,
+      "summary": "Makro tablo net yön üretmiyor. Coin bazlı güç-zayıflık ve destek/direnç teyidi daha önemli.",
       "missing_data": [
         "USDT.D",
         "TOTAL2",
@@ -1763,114 +1227,8 @@
         "Gerçek delta"
       ]
     },
-    "summary": "En güçlü aday: BNB SHORT (72.7/100).",
-    "top_candidates": [
-      {
-        "symbol": "BNB-USD",
-        "name": "BNB",
-        "direction": "SHORT",
-        "score": 72.7,
-        "action": "SHORT adayı",
-        "higher_tf": "4h / 1h",
-        "setup_tf": "30m / 15m",
-        "entry_tf": "5m",
-        "style": "Trend devamı",
-        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
-        "reasons": [
-          "Makro rejim: SHORT ağırlıklı / risk-off.",
-          "Trend: Zayıflıyor, hacim: Artıyor.",
-          "BTC'ye göre göreceli fark: -0.36 puan.",
-          "Fiyat desteğe çok yakın; short için geç kalma riski var.",
-          "Delta/OI gerçek verisi henüz bağlı değil; şimdilik hacim ve fiyat davranışı proxy olarak kullanıldı."
-        ],
-        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif hacim/delta teyidi aranır.",
-        "invalid_if": "Direnç üstü kapanış veya satış hacminin kaybolması. Takip direnç: 617.4219 $."
-      },
-      {
-        "symbol": "OP-USD",
-        "name": "Optimism",
-        "direction": "SHORT",
-        "score": 67.8,
-        "action": "İzleme / SHORT eğilimi",
-        "higher_tf": "4h / 1h",
-        "setup_tf": "30m / 15m",
-        "entry_tf": "5m",
-        "style": "Trend devamı",
-        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
-        "reasons": [
-          "Makro rejim: SHORT ağırlıklı / risk-off.",
-          "Trend: Güçleniyor, hacim: Artıyor.",
-          "BTC'ye göre göreceli fark: +0.63 puan.",
-          "Fiyat direnç bölgesine yakın; red teyidi aranabilir.",
-          "Delta/OI gerçek verisi henüz bağlı değil; şimdilik hacim ve fiyat davranışı proxy olarak kullanıldı."
-        ],
-        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif hacim/delta teyidi aranır.",
-        "invalid_if": "Direnç üstü kapanış veya satış hacminin kaybolması. Takip direnç: 0.1091 $."
-      },
-      {
-        "symbol": "SOL-USD",
-        "name": "Solana",
-        "direction": "SHORT",
-        "score": 63.0,
-        "action": "İzleme / SHORT eğilimi",
-        "higher_tf": "4h / 1h",
-        "setup_tf": "30m / 15m",
-        "entry_tf": "5m",
-        "style": "Trend devamı",
-        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
-        "reasons": [
-          "Makro rejim: SHORT ağırlıklı / risk-off.",
-          "Trend: Güçleniyor, hacim: Artıyor.",
-          "BTC'ye göre göreceli fark: -0.01 puan.",
-          "Fiyat destek/direnç arasında.",
-          "Delta/OI gerçek verisi henüz bağlı değil; şimdilik hacim ve fiyat davranışı proxy olarak kullanıldı."
-        ],
-        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif hacim/delta teyidi aranır.",
-        "invalid_if": "Direnç üstü kapanış veya satış hacminin kaybolması. Takip direnç: 73.9793 $."
-      },
-      {
-        "symbol": "ETH-USD",
-        "name": "Ethereum",
-        "direction": "SHORT",
-        "score": 60.2,
-        "action": "İzleme / SHORT eğilimi",
-        "higher_tf": "1h",
-        "setup_tf": "15m",
-        "entry_tf": "5m / 3m",
-        "style": "Seçici kısa vade",
-        "timeframe_note": "Piyasa kararsız; destek/direnç teyidi olmadan işlem aranmaz.",
-        "reasons": [
-          "Makro rejim: SHORT ağırlıklı / risk-off.",
-          "Trend: Kararsız, hacim: Artıyor.",
-          "BTC'ye göre göreceli fark: +0.57 puan.",
-          "Fiyat destek/direnç arasında.",
-          "Delta/OI gerçek verisi henüz bağlı değil; şimdilik hacim ve fiyat davranışı proxy olarak kullanıldı."
-        ],
-        "entry_plan": "15m direnç retesti veya destek kırılımı beklenir. 5m / 3m negatif hacim/delta teyidi aranır.",
-        "invalid_if": "Direnç üstü kapanış veya satış hacminin kaybolması. Takip direnç: 1794.9612 $."
-      },
-      {
-        "symbol": "OP-USD",
-        "name": "Optimism",
-        "direction": "LONG",
-        "score": 60.2,
-        "action": "İzleme / LONG eğilimi",
-        "higher_tf": "4h / 1h",
-        "setup_tf": "30m / 15m",
-        "entry_tf": "5m",
-        "style": "Trend devamı",
-        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
-        "reasons": [
-          "Makro rejim: SHORT ağırlıklı / risk-off.",
-          "Trend: Güçleniyor, hacim: Artıyor.",
-          "BTC'ye göre göreceli fark: +0.63 puan.",
-          "Fiyat destek/direnç arasında.",
-          "Delta/OI gerçek verisi henüz bağlı değil; şimdilik hacim ve fiyat davranışı proxy olarak kullanıldı."
-        ],
-        "entry_plan": "30m / 15m destekten dönüş veya direnç üstü kapanış beklenir. 5m pozitif hacim/delta teyidi aranır.",
-        "invalid_if": "Destek altı kapanış veya hacimsiz kırılım. Takip destek: 0.091 $."
-      }
-    ],
+    "summary": "Temiz işlem adayı çıkmadı. Sistem NO TRADE modunda kalmayı önerir.",
+    "top_candidates": [],
     "rules": [
       "Skor 70 üzeri: işlem adayı",
       "Skor 55-69: izleme adayı",
