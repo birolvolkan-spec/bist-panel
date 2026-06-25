@@ -37,6 +37,9 @@ jobs:
       - name: Build daily report
         run: python scripts/build_report.py
 
+      - name: Repair crypto data with fallback if needed
+        run: python scripts/crypto_fallback.py
+
       - name: Add coin direction timeframe recommendations
         run: python scripts/add_recommendations.py
 
