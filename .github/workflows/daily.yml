@@ -7,8 +7,9 @@ on:
       - "scripts/**"
       - "requirements.txt"
       - ".github/workflows/daily.yml"
+      - "index.html"
   schedule:
-    - cron: "7,37 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 permissions:
