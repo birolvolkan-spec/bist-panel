@@ -170,5 +170,6 @@
     loadReport().catch(err => { document.getElementById('dailyDecision').textContent = 'Rapor yüklenemedi'; document.getElementById('dailySummary').textContent = err.message; });
     setInterval(loadReport, 5 * 60 * 1000);
   </script>
+  <script src="scripts/recommendations_ui.js"></script>
 </body>
 </html>
