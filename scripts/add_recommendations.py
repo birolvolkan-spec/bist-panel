@@ -61,7 +61,6 @@ def classify_macro(report):
     elif total3_ch > 0.75:
         risk_on_score += 20
 
-    # USDT.D için çoğu ücretsiz kaynakta günlük değişim yok. Değer yüksekse temkin puanı verir.
     if usdt_value is not None:
         if usdt_value >= 6:
             risk_off_score += 8
@@ -238,20 +237,23 @@ def build_candidate(asset, direction, macro, btc_change):
         base -= 15
 
     score = base
-    score += trend_score(asset, direction)
-    score += volume_score(asset, direction)
-    score += relative_score(asset, btc_change, direction)
-    score += futures_score(asset, direction)
+    trend_part = trend_score(asset, direction)
+    volume_part = volume_score(asset, direction)
+    relative_part = relative_score(asset, btc_change, direction)
+    futures_part = futures_score(asset, direction)
     loc_penalty, loc_note = location_penalty(asset, direction)
-    score += loc_penalty
+    score += trend_part + volume_part + relative_part + futures_part + loc_penalty
     score = max(0, min(100, round(score, 1)))
+
+    price_change = val(asset.get("change_pct"), None)
+    relative_to_btc = price_change - btc_change if price_change is not None else None
 
     tf = timeframe_for(asset, direction, score)
     m = metrics(asset)
     reasons = [
         f"Makro rejim: {macro['regime']}.",
         f"Trend: {asset.get('trend')}, hacim: {asset.get('volume_status')}.",
-        f"BTC'ye göre göreceli fark: {val(asset.get('change_pct')) - btc_change:+.2f} puan.",
+        f"Fiyat değişim: {fmt_metric(price_change, '%')}, BTC'ye göre fark: {fmt_metric(relative_to_btc, ' puan')}.",
         f"Delta oranı: {fmt_metric(m.get('last_delta_ratio_pct'), '%')}, taker al/sat: {fmt_metric(m.get('taker_buy_sell_ratio'))}.",
         f"OI değişim: {fmt_metric(m.get('open_interest_change_pct'), '%')}, funding: {fmt_metric(m.get('funding_rate_pct'), '%')}.",
         loc_note,
@@ -282,6 +284,16 @@ def build_candidate(asset, direction, macro, btc_change):
         "direction": direction,
         "score": score,
         "action": action,
+        "price_change_pct": price_change,
+        "relative_to_btc_pct": relative_to_btc,
+        "score_breakdown": {
+            "base_macro": base,
+            "trend": round(trend_part, 2),
+            "volume": round(volume_part, 2),
+            "relative_strength": round(relative_part, 2),
+            "futures": round(futures_part, 2),
+            "location": round(loc_penalty, 2),
+        },
         "higher_tf": tf["higher_tf"],
         "setup_tf": tf["setup_tf"],
         "entry_tf": tf["entry_tf"],
@@ -332,7 +344,7 @@ def build_recommendations(report):
         summary = f"En güçlü aday: {first['name']} {first['direction']} ({first['score']}/100)."
 
     return {
-        "engine_version": "v2.0",
+        "engine_version": "v2.1",
         "market_regime": macro,
         "summary": summary,
         "top_candidates": top,
