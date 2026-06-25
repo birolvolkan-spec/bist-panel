@@ -26,7 +26,7 @@ ASSETS = {
     "bist": [
         ("SASA", "SASA.IS", " ₺"),
         ("ZOREN", "ZOREN.IS", " ₺"),
-        ("BJKAS / BEKTAŞ", "BJKAS.IS", " ₺"),
+        ("HEKTAŞ", "HEKTS.IS", " ₺"),
     ],
     "macro_yf": [
         ("DXY", "DX-Y.NYB", ""),
@@ -35,106 +35,139 @@ ASSETS = {
 }
 
 
-def safe_float(x):
+def safe_float(value):
     try:
-        if x is None or math.isnan(float(x)):
+        if value is None:
             return None
-        return round(float(x), 4)
+        value = float(value)
+        if math.isnan(value) or math.isinf(value):
+            return None
+        return round(value, 4)
     except Exception:
         return None
 
 
-def load_previous():
-    if not DATA_PATH.exists():
-        return {}
+def previous_report():
     try:
-        return json.loads(DATA_PATH.read_text(encoding="utf-8"))
+        return json.loads(DATA_PATH.read_text(encoding="utf-8")) if DATA_PATH.exists() else {}
     except Exception:
         return {}
 
 
-def fetch_history(symbol):
+def history(symbol, days="60d"):
     try:
-        df = yf.Ticker(symbol).history(period="45d", interval="1d", auto_adjust=False)
+        df = yf.Ticker(symbol).history(period=days, interval="1d", auto_adjust=False)
         if df.empty:
             return []
-        df = df.tail(30).reset_index()
         rows = []
-        for _, r in df.iterrows():
-            date_value = r.get("Date")
-            label = str(date_value.date()) if hasattr(date_value, "date") else str(date_value)[:10]
-            rows.append({
-                "date": label,
-                "close": safe_float(r.get("Close")),
-                "volume": safe_float(r.get("Volume")),
-            })
-        return [x for x in rows if x["close"] is not None]
+        for idx, row in df.tail(30).iterrows():
+            label = str(idx.date()) if hasattr(idx, "date") else str(idx)[:10]
+            close = safe_float(row.get("Close"))
+            if close is not None:
+                rows.append({"date": label, "close": close, "volume": safe_float(row.get("Volume"))})
+        return rows
     except Exception:
         return []
 
 
-def asset_report(name, symbol, currency, category, previous):
-    hist = fetch_history(symbol)
-    if len(hist) < 3:
-        return {
-            "name": name,
-            "symbol": symbol,
-            "currency": currency,
-            "last_price": None,
-            "change_pct": 0,
-            "support": None,
-            "resistance": None,
-            "volume_status": "Veri sınırlı",
-            "trend": "Veri sınırlı",
-            "comment": "Bu varlık için ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-            "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-            "history": hist,
-            "bist_extra": "Yabancı para akışı, kademeli emir ve takas detayı ücretsiz kaynaklarda sınırlı olabilir. Veri sağlanırsa ayrıca gösterilecek." if category == "bist" else None,
-        }
+def latest_price(symbol, fallback):
+    try:
+        fast = yf.Ticker(symbol).fast_info
+        for key in ("last_price", "lastPrice", "regular_market_price"):
+            try:
+                price = safe_float(fast[key])
+            except Exception:
+                price = None
+            if price is not None and price > 0:
+                return price
+    except Exception:
+        pass
+    return fallback
 
-    closes = [x["close"] for x in hist if x["close"] is not None]
-    vols = [x.get("volume") for x in hist if x.get("volume") is not None]
-    last = closes[-1]
+
+def limited_asset(name, symbol, currency, category, hist=None):
+    item = {
+        "name": name,
+        "symbol": symbol,
+        "currency": currency,
+        "last_price": None,
+        "change_pct": None,
+        "support": None,
+        "resistance": None,
+        "volume_status": "Veri sınırlı",
+        "trend": "Veri sınırlı",
+        "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
+        "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
+        "history": hist or [],
+    }
+    if category == "bist":
+        item["bist_extra"] = "BIST verisi gecikmeli olabilir. Yabancı para akışı, kademe, kurum dağılımı ve takas detayı için ayrıca veri kaynağı gerekir."
+    return item
+
+
+def find_old(previous, symbol):
+    for group in ("crypto", "commodities", "bist"):
+        for item in previous.get(group, []):
+            if item.get("symbol") == symbol:
+                return item
+    return None
+
+
+def asset_report(name, symbol, currency, category, previous):
+    hist = history(symbol)
+    if len(hist) < 3:
+        return limited_asset(name, symbol, currency, category, hist)
+
+    closes = [x["close"] for x in hist if x.get("close") is not None]
+    volumes = [x.get("volume") for x in hist if x.get("volume") is not None]
+    if len(closes) < 3:
+        return limited_asset(name, symbol, currency, category, hist)
+
+    last_close = closes[-1]
+    last = latest_price(symbol, last_close)
     prev = closes[-2]
-    change = ((last - prev) / prev * 100) if prev else 0
+    change = safe_float(((last - prev) / prev) * 100) if prev else None
+
     recent = closes[-20:] if len(closes) >= 20 else closes
     support = min(recent)
     resistance = max(recent)
     ma5 = sum(closes[-5:]) / min(5, len(closes))
     ma20 = sum(recent) / len(recent)
-    trend = "Güçleniyor" if ma5 > ma20 and change > 0 else "Zayıflıyor" if ma5 < ma20 and change < 0 else "Kararsız"
+    ch = change or 0
+
+    if ma5 > ma20 and ch > 0:
+        trend = "Güçleniyor"
+    elif ma5 < ma20 and ch < 0:
+        trend = "Zayıflıyor"
+    else:
+        trend = "Kararsız"
 
     volume_status = "Veri sınırlı"
-    if len(vols) >= 6:
-        avg_vol = sum(vols[-6:-1]) / 5
-        volume_status = "Artıyor" if vols[-1] > avg_vol * 1.15 else "Zayıf" if vols[-1] < avg_vol * 0.85 else "Normal"
+    if len(volumes) >= 6:
+        avg_vol = sum(volumes[-6:-1]) / 5
+        volume_status = "Artıyor" if volumes[-1] > avg_vol * 1.15 else "Zayıf" if volumes[-1] < avg_vol * 0.85 else "Normal"
 
-    if change > 1 and trend == "Güçleniyor":
-        comment = f"{name} bugün alıcı tarafı toparlıyor. Direnç bölgesi kırılırsa hareket güçlenebilir; acele işlem yerine kapanış teyidi izlenmeli."
-    elif change < -1 and trend == "Zayıflıyor":
-        comment = f"{name} tarafında satış baskısı öne çıkıyor. Destek kaybedilirse risk artar; tepki alımı için hacim teyidi gerekir."
+    if ch > 1 and trend == "Güçleniyor":
+        comment = f"{name} tarafında alıcılar güçleniyor. Direnç üstü kalıcılık gelirse hareket daha sağlıklı olur."
+    elif ch < -1 and trend == "Zayıflıyor":
+        comment = f"{name} tarafında satış baskısı var. Destek kaybı olursa risk artar; tepki için hacim teyidi gerekir."
     else:
-        comment = f"{name} şu an net yön üretmiyor. Destek ve direnç arası hareket izlenmeli; seçici olmak daha sağlıklı."
+        comment = f"{name} net yön üretmiyor. Destek ve direnç arası takip edilmeli; acele işlem yerine teyit beklemek daha doğru."
 
-    old = None
-    for group in ["crypto", "commodities", "bist"]:
-        for item in previous.get(group, []):
-            if item.get("symbol") == symbol:
-                old = item
-                break
+    old = find_old(previous, symbol)
     if old and old.get("last_price"):
-        old_price = old.get("last_price")
-        diff = ((last - old_price) / old_price * 100) if old_price else change
-        compare = f"Önceki rapora göre fiyat değişimi {diff:+.2f}%. Yorum güncel veriye göre revize edildi."
+        old_price = old["last_price"]
+        diff = ((last - old_price) / old_price) * 100 if old_price else ch
+        compare = f"Önceki rapora göre fiyat değişimi {diff:+.2f}%."
     else:
-        compare = f"Düne göre değişim {change:+.2f}%."
+        compare = f"Düne göre değişim {ch:+.2f}%."
 
-    out = {
+    item = {
         "name": name,
         "symbol": symbol,
         "currency": currency,
         "last_price": safe_float(last),
-        "change_pct": safe_float(change),
+        "change_pct": change,
         "support": safe_float(support),
         "resistance": safe_float(resistance),
         "volume_status": volume_status,
@@ -144,86 +177,88 @@ def asset_report(name, symbol, currency, category, previous):
         "history": hist,
     }
     if category == "bist":
-        out["bist_extra"] = "Fiyat ve hacim otomatik izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
-    return out
+        item["bist_extra"] = "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
+    return item
 
 
 def coingecko_macro():
     try:
-        r = requests.get("https://api.coingecko.com/api/v3/global", timeout=20)
-        data = r.json().get("data", {})
-        btc_dom = data.get("market_cap_percentage", {}).get("btc")
-        eth_dom = data.get("market_cap_percentage", {}).get("eth")
-        change = data.get("market_cap_change_percentage_24h_usd")
+        response = requests.get("https://api.coingecko.com/api/v3/global", timeout=20)
+        data = response.json().get("data", {})
+        btc_dom = safe_float(data.get("market_cap_percentage", {}).get("btc"))
+        eth_dom = safe_float(data.get("market_cap_percentage", {}).get("eth"))
+        total_change = safe_float(data.get("market_cap_change_percentage_24h_usd"))
         return [
-            {"name": "BTC Dominance", "change_pct": safe_float(0), "note": f"BTC piyasa payı yaklaşık %{safe_float(btc_dom)}. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir."},
-            {"name": "ETH Dominance", "change_pct": safe_float(0), "note": f"ETH piyasa payı yaklaşık %{safe_float(eth_dom)}. Altcoin iştahı için izlenir."},
-            {"name": "Kripto toplam piyasa", "change_pct": safe_float(change), "note": "Toplam piyasa değeri 24 saatlik değişime göre yorumlanır."},
+            {"name": "BTC Dominance", "change_pct": None, "note": f"BTC piyasa payı yaklaşık %{btc_dom}. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir."},
+            {"name": "ETH Dominance", "change_pct": None, "note": f"ETH piyasa payı yaklaşık %{eth_dom}. Altcoin iştahı için izlenir."},
+            {"name": "Kripto toplam piyasa", "change_pct": total_change, "note": "Toplam piyasa değeri 24 saatlik değişime göre yorumlanır."},
         ]
     except Exception:
-        return [
-            {"name": "BTC Dominance", "change_pct": 0, "note": "CoinGecko verisi alınamadı."},
-            {"name": "TOTAL / TOTAL2 / TOTAL3", "change_pct": 0, "note": "Ücretsiz kaynak sınırlı; sonraki sürümde TradingView alternatifi değerlendirilecek."},
-        ]
+        return [{"name": "Kripto makro", "change_pct": None, "note": "CoinGecko verisi alınamadı."}]
 
 
 def macro_report():
     rows = []
     for name, symbol, _ in ASSETS["macro_yf"]:
-        a = asset_report(name, symbol, "", "macro", {})
-        rows.append({"name": name, "change_pct": a.get("change_pct") or 0, "note": a.get("comment", "")})
+        item = asset_report(name, symbol, "", "macro", {})
+        rows.append({"name": name, "change_pct": item.get("change_pct"), "note": item.get("comment", "")})
     rows.extend(coingecko_macro())
     return rows
 
 
-def simple_list_from_assets(assets):
-    ranked = sorted(assets, key=lambda x: x.get("change_pct") or 0, reverse=True)
+def avg_change(items):
+    values = [x.get("change_pct") for x in items if x.get("change_pct") is not None]
+    return sum(values) / len(values) if values else 0
+
+
+def opportunity_list(items):
+    ranked = sorted(items, key=lambda x: x.get("change_pct") if x.get("change_pct") is not None else -999, reverse=True)
     out = []
-    for a in ranked[:5]:
-        out.append({"name": a["name"], "change_pct": a.get("change_pct") or 0, "note": f"Trend: {a.get('trend')}. Hacim: {a.get('volume_status')}."})
+    for item in ranked[:5]:
+        out.append({"name": item["name"], "change_pct": item.get("change_pct"), "note": f"Trend: {item.get('trend')}. Hacim: {item.get('volume_status')}."})
     return out
 
 
 def main():
     now = datetime.now(IST)
-    previous = load_previous()
+    previous = previous_report()
 
-    crypto = [asset_report(*x, category="crypto", previous=previous) for x in ASSETS["crypto"]]
-    commodities = [asset_report(*x, category="commodities", previous=previous) for x in ASSETS["commodities"]]
-    bist = [asset_report(*x, category="bist", previous=previous) for x in ASSETS["bist"]]
+    crypto = [asset_report(*asset, category="crypto", previous=previous) for asset in ASSETS["crypto"]]
+    commodities = [asset_report(*asset, category="commodities", previous=previous) for asset in ASSETS["commodities"]]
+    bist = [asset_report(*asset, category="bist", previous=previous) for asset in ASSETS["bist"]]
     macro = macro_report()
 
-    crypto_avg = sum([(x.get("change_pct") or 0) for x in crypto]) / max(1, len(crypto))
-    bist_avg = sum([(x.get("change_pct") or 0) for x in bist]) / max(1, len(bist))
-    if crypto_avg > 1 and bist_avg > 0:
-        decision = ("🟢 Risk alınabilir ama seçici", "ORTA-DÜŞÜK", "Kripto ve BIST tarafında toparlanma işaretleri var. Yine de direnç kırılımı ve hacim teyidi beklenmeli.")
-    elif crypto_avg < -1 or bist_avg < -1:
-        decision = ("🔴 Korunmacı kal", "YÜKSEK", "Piyasada satış baskısı öne çıkıyor. Destekler korunmadan agresif işlem almak riskli.")
-    else:
-        decision = ("🟡 Seçici olun", "ORTA", "Piyasa net yön üretmiyor. Destek-direnç arası hareketlerde acele etmek yerine teyit beklemek daha sağlıklı.")
+    crypto_avg = avg_change(crypto)
+    bist_avg = avg_change(bist)
 
-    weekly_items = ["Kripto ortalama: %.2f%%" % crypto_avg, "BIST öncelik ortalama: %.2f%%" % bist_avg, "BIST detay verisi sınırlıysa uyarı gösterilir"]
-    weekly_title = "Pazartesi haftalık radar" if now.weekday() == 0 else "Haftalık izleme özeti"
-    weekly_summary = "Bu bölüm her pazartesi haftalık yön, güçlenenler ve zayıflayanları özetler. Diğer günlerde haftanın mevcut izleme durumunu gösterir."
+    if crypto_avg > 1 and bist_avg > 0:
+        title, risk, summary = "🟢 Risk alınabilir ama seçici", "ORTA-DÜŞÜK", "Kripto ve BIST tarafında toparlanma işaretleri var. Yine de direnç kırılımı ve hacim teyidi beklenmeli."
+    elif crypto_avg < -1 or bist_avg < -1:
+        title, risk, summary = "🔴 Korunmacı kal", "YÜKSEK", "Piyasada satış baskısı öne çıkıyor. Destekler korunmadan agresif işlem almak riskli."
+    else:
+        title, risk, summary = "🟡 Seçici olun", "ORTA", "Piyasa net yön üretmiyor. Destek-direnç arası hareketlerde acele etmek yerine teyit beklemek daha sağlıklı."
 
     report = {
         "report_date": now.strftime("%Y-%m-%d"),
         "updated_at": now.strftime("%H:%M Türkiye saati"),
-        "daily_decision": {"title": decision[0], "risk": decision[1], "summary": decision[2]},
-        "weekly_report": {"title": weekly_title, "summary": weekly_summary, "items": weekly_items},
+        "daily_decision": {"title": title, "risk": risk, "summary": summary},
+        "weekly_report": {
+            "title": "Pazartesi haftalık radar" if now.weekday() == 0 else "Haftalık izleme özeti",
+            "summary": "Pazartesi günleri haftalık yön, güçlenenler ve zayıflayanlar özetlenir. Diğer günlerde haftanın mevcut izleme durumu gösterilir.",
+            "items": [f"Kripto ortalama: {crypto_avg:.2f}%", f"BIST öncelik ortalama: {bist_avg:.2f}%", "BIST detay verisi yoksa açıkça sınırlı veri yazılır"],
+        },
         "macro": macro,
         "comparison": [
-            {"name": "Kripto ortalama", "change_pct": safe_float(crypto_avg), "note": "BTC, ETH, SOL, BNB ve OP ortalama günlük değişimi."},
-            {"name": "BIST öncelikli ortalama", "change_pct": safe_float(bist_avg), "note": "SASA, ZOREN ve BJKAS takip listesinin ortalama günlük değişimi."},
+            {"name": "Kripto ortalama", "change_pct": safe_float(crypto_avg), "note": "BTC, ETH, SOL, BNB ve OP ortalama değişimi."},
+            {"name": "BIST öncelikli ortalama", "change_pct": safe_float(bist_avg), "note": "SASA, ZOREN ve HEKTAŞ takip listesinin ortalama değişimi."},
         ],
         "crypto": crypto,
         "commodities": commodities,
         "bist": bist,
-        "opportunities": simple_list_from_assets(crypto + bist),
-        "funds": [
-            {"name": "Fon radarı", "change_pct": 0, "note": "Fon verisi için TEFAS/KAP kaynakları sonraki aşamada eklenecek. Şimdilik otomatik veri sınırlı."}
-        ],
+        "opportunities": opportunity_list(crypto + bist),
+        "funds": [{"name": "Fon radarı", "change_pct": None, "note": "Fon verisi için TEFAS/KAP kaynakları sonraki aşamada eklenecek. Şimdilik otomatik veri sınırlı."}],
     }
+
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     DATA_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Rapor yazıldı: {DATA_PATH}")
