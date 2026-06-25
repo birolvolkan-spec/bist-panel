@@ -1,12 +1,22 @@
 name: Volkan Daily Radar
 
 on:
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/**"
+      - "requirements.txt"
+      - ".github/workflows/daily.yml"
   schedule:
-    - cron: "30 5 * * *"
+    - cron: "7,37 * * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: volkan-daily-radar
+  cancel-in-progress: true
 
 jobs:
   build-report:
