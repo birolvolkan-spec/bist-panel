@@ -13,8 +13,9 @@
       <p class="eyebrow">VOLKAN DAILY RADAR</p>
       <h1>Günlük Piyasa Raporu</h1>
       <p id="reportDate">Yükleniyor...</p>
+      <p class="muted" id="autoInfo">Arka plan raporu 15 dakikada bir üretilir. Ekran açıkken son rapor otomatik tekrar yüklenir.</p>
     </div>
-    <button id="refreshBtn">Veriyi yenile</button>
+    <button id="refreshBtn">Son raporu tekrar yükle</button>
   </header>
 
   <main>
@@ -35,49 +36,28 @@
     </section>
 
     <section class="grid2">
-      <div class="card">
-        <p class="eyebrow">Makro Radar</p>
-        <div id="macroList" class="list"></div>
-      </div>
-      <div class="card">
-        <p class="eyebrow">Dün → Bugün</p>
-        <div id="compareList" class="list"></div>
-      </div>
+      <div class="card"><p class="eyebrow">Makro Radar</p><div id="macroList" class="list"></div></div>
+      <div class="card"><p class="eyebrow">Dün → Bugün</p><div id="compareList" class="list"></div></div>
     </section>
 
     <section>
-      <div class="sectionTitle">
-        <h2>Kripto</h2>
-        <p>BTC, ETH, SOL, BNB, OP</p>
-      </div>
+      <div class="sectionTitle"><h2>Kripto</h2><p>BTC, ETH, SOL, BNB, OP</p></div>
       <div id="cryptoCards" class="assetGrid"></div>
     </section>
 
     <section>
-      <div class="sectionTitle">
-        <h2>Emtia</h2>
-        <p>Altın ve Brent petrol</p>
-      </div>
+      <div class="sectionTitle"><h2>Emtia</h2><p>Altın ve Brent petrol</p></div>
       <div id="commodityCards" class="assetGrid"></div>
     </section>
 
     <section>
-      <div class="sectionTitle">
-        <h2>BIST Öncelikli Takip</h2>
-        <p>SASA, ZOREN, BJKAS/BEKTAŞ</p>
-      </div>
+      <div class="sectionTitle"><h2>BIST Öncelikli Takip</h2><p>SASA, ZOREN, HEKTAŞ</p></div>
       <div id="bistCards" class="assetGrid"></div>
     </section>
 
     <section class="grid2">
-      <div class="card">
-        <p class="eyebrow">Günün Fırsat Havuzu</p>
-        <div id="opportunities" class="list"></div>
-      </div>
-      <div class="card">
-        <p class="eyebrow">Fon Radar</p>
-        <div id="funds" class="list"></div>
-      </div>
+      <div class="card"><p class="eyebrow">Günün Fırsat Havuzu</p><div id="opportunities" class="list"></div></div>
+      <div class="card"><p class="eyebrow">Fon Radar</p><div id="funds" class="list"></div></div>
     </section>
 
     <section class="card muted">
@@ -92,17 +72,18 @@
     function fmt(n, suffix = '') {
       if (n === null || n === undefined || Number.isNaN(Number(n))) return '-';
       const value = Number(n);
-      if (Math.abs(value) >= 1000) return value.toLocaleString('tr-TR', { maximumFractionDigits: 2 }) + suffix;
       return value.toLocaleString('tr-TR', { maximumFractionDigits: 2 }) + suffix;
     }
 
     function pct(n) {
       if (n === null || n === undefined || Number.isNaN(Number(n))) return '-';
-      const sign = Number(n) > 0 ? '+' : '';
-      return sign + Number(n).toLocaleString('tr-TR', { maximumFractionDigits: 2 }) + '%';
+      const value = Number(n);
+      const sign = value > 0 ? '+' : '';
+      return sign + value.toLocaleString('tr-TR', { maximumFractionDigits: 2 }) + '%';
     }
 
     function badgeClass(change) {
+      if (change === null || change === undefined || Number.isNaN(Number(change))) return 'neutral';
       if (change > 0.5) return 'good';
       if (change < -0.5) return 'bad';
       return 'neutral';
@@ -113,29 +94,10 @@
     }
 
     function makeChart(canvas, labels, values) {
-      const ctx = canvas.getContext('2d');
-      const chart = new Chart(ctx, {
+      const chart = new Chart(canvas.getContext('2d'), {
         type: 'line',
-        data: {
-          labels,
-          datasets: [{
-            label: 'Fiyat',
-            data: values,
-            tension: 0.35,
-            borderWidth: 2,
-            pointRadius: 0,
-            fill: false
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            x: { display: false },
-            y: { display: false }
-          }
-        }
+        data: { labels, datasets: [{ label: 'Fiyat', data: values, tension: 0.35, borderWidth: 2, pointRadius: 0, fill: false }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { display: false } } }
       });
       charts.push(chart);
     }
@@ -150,15 +112,10 @@
     function renderAsset(container, asset) {
       const card = document.createElement('article');
       card.className = 'asset card';
-      const chartId = 'chart_' + asset.symbol.replace(/[^a-zA-Z0-9]/g, '_');
+      const safeSymbol = (asset.symbol || asset.name || 'asset').replace(/[^a-zA-Z0-9]/g, '_');
+      const chartId = 'chart_' + safeSymbol;
       card.innerHTML = `
-        <div class="assetHead">
-          <div>
-            <h3>${asset.name}</h3>
-            <p>${asset.symbol}</p>
-          </div>
-          <span class="badge ${badgeClass(asset.change_pct)}">${pct(asset.change_pct)}</span>
-        </div>
+        <div class="assetHead"><div><h3>${asset.name}</h3><p>${asset.symbol || ''}</p></div><span class="badge ${badgeClass(asset.change_pct)}">${pct(asset.change_pct)}</span></div>
         <div class="price">${fmt(asset.last_price, asset.currency || '')}</div>
         <div class="chartWrap"><canvas id="${chartId}"></canvas></div>
         <div class="levels">
@@ -169,12 +126,11 @@
         </div>
         <div class="comment"><strong>Yorum:</strong> ${asset.comment || 'Yorum yok.'}</div>
         <div class="comment small"><strong>Dün → Bugün:</strong> ${asset.compare || 'Karşılaştırma yok.'}</div>
-        ${asset.bist_extra ? `<div class="bistExtra"><strong>BIST veri notu</strong><p>${asset.bist_extra}</p></div>` : ''}
-      `;
+        ${asset.bist_extra ? `<div class="bistExtra"><strong>BIST veri notu</strong><p>${asset.bist_extra}</p></div>` : ''}`;
       container.appendChild(card);
       const labels = (asset.history || []).map(x => x.date);
-      const values = (asset.history || []).map(x => x.close);
-      if (labels.length > 1) makeChart(card.querySelector('canvas'), labels, values);
+      const values = (asset.history || []).map(x => x.close).filter(x => x !== null && x !== undefined);
+      if (labels.length > 1 && values.length > 1) makeChart(card.querySelector('canvas'), labels, values);
     }
 
     function renderList(id, items) {
@@ -186,45 +142,33 @@
 
     async function loadReport() {
       destroyCharts();
-      const res = await fetch('data/daily_report.json?v=' + Date.now());
+      const res = await fetch('data/daily_report.json?v=' + Date.now(), { cache: 'no-store' });
       const data = await res.json();
-
       document.getElementById('reportDate').textContent = `${data.report_date} • Son güncelleme: ${data.updated_at}`;
       document.getElementById('dailyDecision').textContent = data.daily_decision?.title || '-';
       document.getElementById('dailySummary').textContent = data.daily_decision?.summary || '';
       document.getElementById('riskLevel').textContent = data.daily_decision?.risk || '-';
-
       document.getElementById('weeklyTitle').textContent = data.weekly_report?.title || 'Haftalık özet';
       document.getElementById('weeklySummary').textContent = data.weekly_report?.summary || '';
       const weeklyItems = document.getElementById('weeklyItems');
       weeklyItems.innerHTML = '';
-      (data.weekly_report?.items || []).forEach(x => {
-        const span = document.createElement('span');
-        span.textContent = x;
-        weeklyItems.appendChild(span);
-      });
-
+      (data.weekly_report?.items || []).forEach(x => { const span = document.createElement('span'); span.textContent = x; weeklyItems.appendChild(span); });
       renderList('macroList', data.macro);
       renderList('compareList', data.comparison);
       renderList('opportunities', data.opportunities);
       renderList('funds', data.funds);
-
       const crypto = document.getElementById('cryptoCards');
       const commodity = document.getElementById('commodityCards');
       const bist = document.getElementById('bistCards');
-      crypto.innerHTML = '';
-      commodity.innerHTML = '';
-      bist.innerHTML = '';
+      crypto.innerHTML = ''; commodity.innerHTML = ''; bist.innerHTML = '';
       (data.crypto || []).forEach(a => renderAsset(crypto, a));
       (data.commodities || []).forEach(a => renderAsset(commodity, a));
       (data.bist || []).forEach(a => renderAsset(bist, a));
     }
 
     document.getElementById('refreshBtn').addEventListener('click', loadReport);
-    loadReport().catch(err => {
-      document.getElementById('dailyDecision').textContent = 'Rapor yüklenemedi';
-      document.getElementById('dailySummary').textContent = err.message;
-    });
+    loadReport().catch(err => { document.getElementById('dailyDecision').textContent = 'Rapor yüklenemedi'; document.getElementById('dailySummary').textContent = err.message; });
+    setInterval(loadReport, 5 * 60 * 1000);
   </script>
 </body>
 </html>
