@@ -1,6 +1,6 @@
 {
   "report_date": "2026-06-25",
-  "updated_at": "15:32 Türkiye saati",
+  "updated_at": "15:50 Türkiye saati",
   "data_layer": {
     "crypto_source": "Binance USD-M Futures public data",
     "macro_source": "Yahoo Finance + CoinGecko global",
@@ -37,7 +37,8 @@
       "taker_buy_sell_ratio",
       "candle_delta",
       "delta_ratio"
-    ]
+    ],
+    "crypto_fallback": "Yahoo Finance spot fallback fills price/volume when Binance Futures is unavailable from GitHub Actions"
   },
   "daily_decision": {
     "title": "🔴 Korunmacı kal",
@@ -49,65 +50,65 @@
     "summary": "Pazartesi günleri haftalık yön, güçlenenler ve zayıflayanlar özetlenir. Diğer günlerde haftanın mevcut izleme durumu gösterilir.",
     "items": [
       "Kripto ortalama: 0.00%",
-      "BIST öncelik ortalama: -2.59%",
+      "BIST öncelik ortalama: -2.37%",
       "Delta/OI/Funding verisi coin öneri motoruna aktarılır"
     ]
   },
   "macro": [
     {
       "name": "DXY",
-      "change_pct": 0.1024,
+      "change_pct": -0.0187,
       "note": "DXY net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "value": 101.714,
+      "value": 101.591,
       "data_ready": true
     },
     {
       "name": "BIST 100",
-      "change_pct": -0.2598,
+      "change_pct": -0.1564,
       "note": "BIST 100 net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "value": 14293.9697,
+      "value": 14308.79,
       "data_ready": true
     },
     {
       "name": "TOTAL",
-      "change_pct": -1.9972,
-      "note": "Toplam kripto piyasa değeri yaklaşık 2,185,362,475,483.29 USD.",
-      "value": 2185362475483.29,
+      "change_pct": -1.6932,
+      "note": "Toplam kripto piyasa değeri yaklaşık 2,192,140,180,056.89 USD.",
+      "value": 2192140180056.89,
       "data_ready": true
     },
     {
       "name": "TOTAL2",
-      "change_pct": -1.9972,
-      "note": "BTC hariç piyasa değeri yaklaşık 960,777,129,446.42 USD. Altcoin geniş piyasa gücü için izlenir.",
-      "value": 960777129446.42,
+      "change_pct": -1.6932,
+      "note": "BTC hariç piyasa değeri yaklaşık 962,958,954,015.03 USD. Altcoin geniş piyasa gücü için izlenir.",
+      "value": 962958954015.03,
       "data_ready": true
     },
     {
       "name": "TOTAL3",
-      "change_pct": -1.9972,
-      "note": "BTC ve ETH hariç piyasa değeri yaklaşık 764,343,637,975.13 USD. Altcoin risk iştahı için ana filtredir.",
-      "value": 764343637975.13,
+      "change_pct": -1.6932,
+      "note": "BTC ve ETH hariç piyasa değeri yaklaşık 765,622,495,006.31 USD. Altcoin risk iştahı için ana filtredir.",
+      "value": 765622495006.31,
       "data_ready": true
     },
     {
       "name": "BTC Dominance",
       "change_pct": null,
-      "note": "BTC piyasa payı yaklaşık %56.0358. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir.",
-      "value": 56.0358,
+      "note": "BTC piyasa payı yaklaşık %56.0722. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir.",
+      "value": 56.0722,
       "data_ready": true
     },
     {
       "name": "ETH Dominance",
       "change_pct": null,
-      "note": "ETH piyasa payı yaklaşık %8.9886. Altcoin iştahı için izlenir.",
-      "value": 8.9886,
+      "note": "ETH piyasa payı yaklaşık %9.002. Altcoin iştahı için izlenir.",
+      "value": 9.002,
       "data_ready": true
     },
     {
       "name": "USDT.D",
       "change_pct": null,
-      "note": "USDT piyasa payı yaklaşık %8.5148. Yükseliş riskten kaçışı, düşüş risk iştahını gösterebilir.",
-      "value": 8.5148,
+      "note": "USDT piyasa payı yaklaşık %8.4876. Yükseliş riskten kaçışı, düşüş risk iştahını gösterebilir.",
+      "value": 8.4876,
       "data_ready": true
     }
   ],
@@ -119,7 +120,7 @@
     },
     {
       "name": "BIST öncelikli ortalama",
-      "change_pct": -2.5886,
+      "change_pct": -2.3661,
       "note": "SASA, ZOREN ve HEKTAŞ takip listesinin ortalama değişimi."
     }
   ],
@@ -128,197 +129,2381 @@
       "name": "Bitcoin",
       "symbol": "BTCUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 61262.9414,
+      "change_pct": 0.4391,
+      "support": 60867.4141,
+      "resistance": 66289.5,
+      "volume_status": "Artıyor",
+      "trend": "Kararsız",
+      "comment": "Bitcoin Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.44%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 74344.7031,
+          "volume": 33802172927.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 73536.5547,
+          "volume": 40148145327.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 73372.5234,
+          "volume": 34457929250.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 73754.8359,
+          "volume": 19563589191.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 73579.6875,
+          "volume": 17445435650.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 71319.7734,
+          "volume": 43378836121.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 66703.6562,
+          "volume": 54990073882.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 64014.3672,
+          "volume": 47411556213.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 63801.5742,
+          "volume": 63800151780.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 60922.668,
+          "volume": 71465606706.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 60867.4141,
+          "volume": 30898464957.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 63239.5195,
+          "volume": 36006496194.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 63090.5898,
+          "volume": 34133252457.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 61643.7812,
+          "volume": 40144449754.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 61449.2891,
+          "volume": 27493506779.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 63561.0547,
+          "volume": 29316677897.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 63543.1992,
+          "volume": 26881868307.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 64421.3242,
+          "volume": 16956245530.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 65710.3984,
+          "volume": 21572226975.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 66289.5,
+          "volume": 32927321950.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 65600.6406,
+          "volume": 25063963967.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 64418.4453,
+          "volume": 31288885189.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 62896.4727,
+          "volume": 30432454936.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 63540.8359,
+          "volume": 22361931660.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 64239.6758,
+          "volume": 17486384117.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 63237.5391,
+          "volume": 15739619591.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 63952.1055,
+          "volume": 26561496819.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 62668.0195,
+          "volume": 29608942370.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 60995.1328,
+          "volume": 42644106535.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 61262.9414,
+          "volume": 45447802880.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Ethereum",
       "symbol": "ETHUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 1636.62,
+      "change_pct": 1.0306,
+      "support": 1568.7677,
+      "resistance": 1794.9612,
+      "volume_status": "Artıyor",
+      "trend": "Kararsız",
+      "comment": "Ethereum Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +1.03%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 2022.1982,
+          "volume": 14534289020.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 2007.5527,
+          "volume": 18109844096.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 2011.9785,
+          "volume": 14941194039.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 2019.4583,
+          "volume": 7478416074.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 2004.3416,
+          "volume": 9253505209.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 2003.2212,
+          "volume": 19458810001.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 1857.7163,
+          "volume": 25205401403.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 1811.7323,
+          "volume": 24083350214.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 1769.5806,
+          "volume": 27112623897.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 1580.8608,
+          "volume": 39924177669.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 1568.7677,
+          "volume": 18426248218.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 1686.3962,
+          "volume": 15172606860.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 1690.1486,
+          "volume": 17427269148.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 1637.7067,
+          "volume": 15196855528.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 1620.1377,
+          "volume": 12655731412.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 1672.2806,
+          "volume": 12379882531.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 1665.1278,
+          "volume": 9989137815.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 1680.2146,
+          "volume": 6101094488.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 1724.6133,
+          "volume": 7804982667.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 1794.9612,
+          "volume": 17921331594.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 1790.3982,
+          "volume": 14698492893.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 1747.8855,
+          "volume": 14185457929.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 1709.5334,
+          "volume": 12942260783.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 1710.9824,
+          "volume": 7855725190.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 1739.3014,
+          "volume": 7773536600.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 1704.5806,
+          "volume": 8498711726.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 1726.5109,
+          "volume": 13584368622.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 1665.4368,
+          "volume": 10431438278.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 1619.9249,
+          "volume": 14059894232.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 1636.62,
+          "volume": 16373861376.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Solana",
       "symbol": "SOLUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 68.38,
+      "change_pct": 0.5847,
+      "support": 62.1898,
+      "resistance": 73.9793,
+      "volume_status": "Artıyor",
+      "trend": "Güçleniyor",
+      "comment": "Solana Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.58%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 82.3681,
+          "volume": 3313099113.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 81.9854,
+          "volume": 3669754717.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 81.9325,
+          "volume": 3340907091.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 82.5473,
+          "volume": 2257737109.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 82.2983,
+          "volume": 2207975455.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 81.087,
+          "volume": 3764320653.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 74.1429,
+          "volume": 4479904038.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 71.6124,
+          "volume": 4320073081.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 68.7189,
+          "volume": 5532042136.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 63.4869,
+          "volume": 6580342268.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 62.1898,
+          "volume": 3098233389.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 66.3106,
+          "volume": 2721563824.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 66.795,
+          "volume": 2829739169.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 64.9621,
+          "volume": 2794618813.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 63.161,
+          "volume": 2771122697.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 66.822,
+          "volume": 2584434257.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 66.7493,
+          "volume": 2496073408.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 68.8728,
+          "volume": 1473600629.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 71.1662,
+          "volume": 1618939393.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 73.9793,
+          "volume": 2855926507.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 73.4138,
+          "volume": 2180655774.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 71.931,
+          "volume": 2589799897.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 69.6265,
+          "volume": 2261568852.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 69.7206,
+          "volume": 1724372055.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 73.1727,
+          "volume": 2008492615.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 72.4182,
+          "volume": 1920143205.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 71.9082,
+          "volume": 2409081243.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 69.6437,
+          "volume": 2072312842.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 67.9825,
+          "volume": 3271251788.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 68.38,
+          "volume": 3436342016.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "BNB",
       "symbol": "BNBUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 563.1,
+      "change_pct": -0.119,
+      "support": 563.1,
+      "resistance": 617.4219,
+      "volume_status": "Artıyor",
+      "trend": "Zayıflıyor",
+      "comment": "BNB Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -0.12%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 648.1592,
+          "volume": 1299270396.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 637.4938,
+          "volume": 1387114881.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 642.2873,
+          "volume": 1229212667.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 717.9338,
+          "volume": 3590363740.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 708.5842,
+          "volume": 3011261654.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 692.1308,
+          "volume": 3603890086.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 650.43,
+          "volume": 2212967555.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 620.0994,
+          "volume": 2023083015.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 603.5347,
+          "volume": 2306830558.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 572.1069,
+          "volume": 2607132303.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 574.5108,
+          "volume": 1418745727.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 603.629,
+          "volume": 1355939748.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 601.6277,
+          "volume": 1157549571.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 592.8506,
+          "volume": 1187053835.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 586.1738,
+          "volume": 1017565363.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 605.0416,
+          "volume": 1095074108.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 603.5066,
+          "volume": 994015378.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 609.5438,
+          "volume": 821135662.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 616.0859,
+          "volume": 1036522794.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 617.4219,
+          "volume": 1343292765.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 604.3461,
+          "volume": 1347367138.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 600.9587,
+          "volume": 1281028503.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 578.0147,
+          "volume": 1125978611.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 581.1638,
+          "volume": 869522115.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 587.6139,
+          "volume": 828038134.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 583.7516,
+          "volume": 758751631.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 589.9187,
+          "volume": 989771505.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 577.5997,
+          "volume": 966075609.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 563.7708,
+          "volume": 1326402841.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 563.1,
+          "volume": 1450282240.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "XRP",
       "symbol": "XRPUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 1.0737,
+      "change_pct": 0.1306,
+      "support": 1.0723,
+      "resistance": 1.2382,
+      "volume_status": "Artıyor",
+      "trend": "Kararsız",
+      "comment": "XRP Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.13%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 1.3062,
+          "volume": 1878050770.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 1.3135,
+          "volume": 2564063217.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 1.3283,
+          "volume": 2175452557.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 1.3383,
+          "volume": 1732274683.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 1.3313,
+          "volume": 1201205120.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 1.2949,
+          "volume": 2221780390.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 1.2099,
+          "volume": 3140773533.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 1.2003,
+          "volume": 2515511848.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 1.1666,
+          "volume": 3379235267.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 1.0964,
+          "volume": 4104684182.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 1.0935,
+          "volume": 2190389936.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 1.1547,
+          "volume": 2135757215.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 1.1682,
+          "volume": 2123608548.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 1.1373,
+          "volume": 1886518539.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 1.0972,
+          "volume": 1929043739.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 1.1416,
+          "volume": 1717799091.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 1.1321,
+          "volume": 1477503646.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 1.15,
+          "volume": 932351624.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 1.1858,
+          "volume": 1149569738.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 1.2382,
+          "volume": 3068640189.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 1.216,
+          "volume": 1770738068.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 1.1851,
+          "volume": 1926247784.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 1.1454,
+          "volume": 1834719756.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 1.1364,
+          "volume": 1294601711.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 1.1491,
+          "volume": 930203909.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 1.1244,
+          "volume": 906708305.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 1.1286,
+          "volume": 1440361876.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 1.1094,
+          "volume": 1381808683.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 1.0723,
+          "volume": 2204954952.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 1.0737,
+          "volume": 2216461312.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Cardano",
       "symbol": "ADAUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 0.1477,
+      "change_pct": 0.1356,
+      "support": 0.1475,
+      "resistance": 0.1828,
+      "volume_status": "Artıyor",
+      "trend": "Kararsız",
+      "comment": "Cardano Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.14%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 0.2371,
+          "volume": 421872879.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 0.2344,
+          "volume": 520513722.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 0.2326,
+          "volume": 360213113.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 0.2354,
+          "volume": 351798466.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 0.2353,
+          "volume": 291589615.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 0.2306,
+          "volume": 492945357.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 0.2126,
+          "volume": 658043120.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 0.2005,
+          "volume": 643831979.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 0.1796,
+          "volume": 946165886.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 0.1566,
+          "volume": 1208509053.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 0.1573,
+          "volume": 683251427.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 0.165,
+          "volume": 545023352.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 0.1703,
+          "volume": 486559298.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 0.1653,
+          "volume": 423198020.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 0.1608,
+          "volume": 457510708.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 0.1703,
+          "volume": 470482548.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 0.1698,
+          "volume": 438278422.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 0.1718,
+          "volume": 334776233.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 0.1828,
+          "volume": 381601010.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 0.1786,
+          "volume": 664256765.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 0.1721,
+          "volume": 403655785.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 0.1666,
+          "volume": 519578389.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 0.1634,
+          "volume": 336500935.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 0.1621,
+          "volume": 266241532.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 0.1631,
+          "volume": 227223971.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 0.1566,
+          "volume": 246967999.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 0.1584,
+          "volume": 297545767.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 0.1514,
+          "volume": 398295602.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 0.1475,
+          "volume": 655127987.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 0.1477,
+          "volume": 603703360.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Dogecoin",
       "symbol": "DOGEUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 0.0759,
+      "change_pct": -0.1316,
+      "support": 0.0759,
+      "resistance": 0.0888,
+      "volume_status": "Artıyor",
+      "trend": "Zayıflıyor",
+      "comment": "Dogecoin Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -0.13%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 0.1004,
+          "volume": 804090270.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 0.0994,
+          "volume": 965939870.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 0.0996,
+          "volume": 713308044.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 0.1004,
+          "volume": 573303190.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 0.1003,
+          "volume": 519375538.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 0.1007,
+          "volume": 1085202118.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 0.0926,
+          "volume": 1479233067.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 0.0914,
+          "volume": 956689831.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 0.0884,
+          "volume": 1454997905.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 0.0814,
+          "volume": 1953394364.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 0.0819,
+          "volume": 938400078.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 0.0861,
+          "volume": 824946985.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 0.0863,
+          "volume": 653338940.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 0.0848,
+          "volume": 760706416.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 0.083,
+          "volume": 603745819.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 0.086,
+          "volume": 620809279.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 0.086,
+          "volume": 1233803732.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 0.0879,
+          "volume": 594340596.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 0.0888,
+          "volume": 548008068.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 0.0881,
+          "volume": 991467900.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 0.0871,
+          "volume": 695949486.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 0.0858,
+          "volume": 582872315.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 0.0834,
+          "volume": 534177121.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 0.0835,
+          "volume": 364426485.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 0.0836,
+          "volume": 357318788.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 0.0822,
+          "volume": 306721310.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 0.0824,
+          "volume": 450831568.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 0.0788,
+          "volume": 661419088.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 0.076,
+          "volume": 943832498.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 0.0759,
+          "volume": 1008984320.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Avalanche",
       "symbol": "AVAXUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 6.38,
+      "change_pct": -1.0039,
+      "support": 5.9057,
+      "resistance": 6.8695,
+      "volume_status": "Normal",
+      "trend": "Zayıflıyor",
+      "comment": "Avalanche Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -1.00%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 9.0375,
+          "volume": 286987107.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 8.9128,
+          "volume": 320046519.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 8.8159,
+          "volume": 270031382.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 8.9237,
+          "volume": 216024239.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 8.9599,
+          "volume": 219460937.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 8.9159,
+          "volume": 296482697.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 8.1676,
+          "volume": 327514289.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 8.0504,
+          "volume": 452616239.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 7.6883,
+          "volume": 486183517.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 6.7078,
+          "volume": 538532631.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 6.6709,
+          "volume": 299706702.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 6.7961,
+          "volume": 292133817.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 6.7579,
+          "volume": 294165996.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 6.6396,
+          "volume": 257328807.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 6.3873,
+          "volume": 312041811.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 6.6402,
+          "volume": 274658120.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 6.5649,
+          "volume": 208442319.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 6.7155,
+          "volume": 170442264.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 6.7758,
+          "volume": 226638541.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 6.8372,
+          "volume": 320384478.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 6.8695,
+          "volume": 284793721.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 6.7515,
+          "volume": 328603242.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 6.307,
+          "volume": 348578621.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 5.9057,
+          "volume": 525364010.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 6.2334,
+          "volume": 414758597.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 6.106,
+          "volume": 232480606.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 6.2325,
+          "volume": 250385169.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 6.4857,
+          "volume": 345021498.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 6.4447,
+          "volume": 327698660.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 6.38,
+          "volume": 359972128.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Chainlink",
       "symbol": "LINKUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 7.444,
+      "change_pct": 0.3897,
+      "support": 7.398,
+      "resistance": 8.2952,
+      "volume_status": "Artıyor",
+      "trend": "Kararsız",
+      "comment": "Chainlink Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.39%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 9.1281,
+          "volume": 345379299.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 8.9884,
+          "volume": 401320812.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 9.0152,
+          "volume": 315470580.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 9.1652,
+          "volume": 316654045.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 9.1267,
+          "volume": 292605012.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 9.038,
+          "volume": 346950273.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 8.3624,
+          "volume": 438831254.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 8.335,
+          "volume": 467656019.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 8.0008,
+          "volume": 623748553.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 7.3507,
+          "volume": 665022939.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 7.398,
+          "volume": 375901984.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 7.8985,
+          "volume": 343643178.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 7.9875,
+          "volume": 334329935.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 7.837,
+          "volume": 317616595.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 7.563,
+          "volume": 276204362.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 7.8823,
+          "volume": 304627853.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 7.8557,
+          "volume": 214718054.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 7.9774,
+          "volume": 184171303.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 8.1662,
+          "volume": 198671957.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 8.2952,
+          "volume": 326395749.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 8.2645,
+          "volume": 230496375.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 8.0773,
+          "volume": 248031294.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 8.0017,
+          "volume": 253035479.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 7.9419,
+          "volume": 206176755.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 7.9769,
+          "volume": 176975376.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 7.7753,
+          "volume": 163742518.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 7.8651,
+          "volume": 240318358.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 7.6234,
+          "volume": 260140544.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 7.4151,
+          "volume": 335063599.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 7.444,
+          "volume": 310151680.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Polkadot",
       "symbol": "DOTUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 0.878,
+      "change_pct": -0.9588,
+      "support": 0.878,
+      "resistance": 1.0118,
+      "volume_status": "Artıyor",
+      "trend": "Zayıflıyor",
+      "comment": "Polkadot Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -0.96%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 1.2289,
+          "volume": 184688273.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 1.2128,
+          "volume": 181196760.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 1.1921,
+          "volume": 166538121.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 1.1871,
+          "volume": 138472265.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 1.1863,
+          "volume": 132455419.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 1.1555,
+          "volume": 209434278.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 1.0768,
+          "volume": 212584724.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 1.1035,
+          "volume": 198206870.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 1.036,
+          "volume": 186190228.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 0.9437,
+          "volume": 195568722.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 0.9428,
+          "volume": 125645735.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 0.9706,
+          "volume": 109221735.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 0.9735,
+          "volume": 92072590.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 0.9578,
+          "volume": 85079930.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 0.9159,
+          "volume": 87391247.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 0.9504,
+          "volume": 90450219.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 0.9564,
+          "volume": 91218463.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 0.9799,
+          "volume": 86893932.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 0.9945,
+          "volume": 74177665.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 1.0103,
+          "volume": 130972304.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 1.0118,
+          "volume": 83249847.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 1.0022,
+          "volume": 108280874.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 0.9725,
+          "volume": 90937004.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 0.9606,
+          "volume": 68455695.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 0.9681,
+          "volume": 57684340.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 0.9411,
+          "volume": 51787942.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 0.9349,
+          "volume": 67922095.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 0.9091,
+          "volume": 78000519.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 0.8865,
+          "volume": 99123501.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 0.878,
+          "volume": 92871552.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Litecoin",
       "symbol": "LTCUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 41.37,
+      "change_pct": 0.8449,
+      "support": 41.0234,
+      "resistance": 45.8036,
+      "volume_status": "Artıyor",
+      "trend": "Kararsız",
+      "comment": "Litecoin Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.84%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 51.9226,
+          "volume": 252065091.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 51.5876,
+          "volume": 293114697.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 51.8305,
+          "volume": 250888377.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 52.3465,
+          "volume": 223316329.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 52.0038,
+          "volume": 206316979.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 50.7206,
+          "volume": 303310345.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 46.9071,
+          "volume": 402451348.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 47.1436,
+          "volume": 352488746.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 45.5545,
+          "volume": 391232099.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 43.2416,
+          "volume": 469920301.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 41.337,
+          "volume": 330815380.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 42.8379,
+          "volume": 327484995.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 43.064,
+          "volume": 281758611.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 43.0063,
+          "volume": 261415257.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 41.7187,
+          "volume": 248219678.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 42.5084,
+          "volume": 214340988.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 43.0461,
+          "volume": 225876016.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 44.2862,
+          "volume": 185484725.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 45.3588,
+          "volume": 210796666.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 45.8036,
+          "volume": 299791970.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 45.6333,
+          "volume": 234234290.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 44.8604,
+          "volume": 203629911.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 43.8032,
+          "volume": 194265553.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 44.0588,
+          "volume": 172460528.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 44.4907,
+          "volume": 155196443.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 44.4397,
+          "volume": 189128869.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 44.5406,
+          "volume": 184446407.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 42.1338,
+          "volume": 221787112.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 41.0234,
+          "volume": 264031026.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 41.37,
+          "volume": 265943696.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Arbitrum",
       "symbol": "ARBUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 0.0008,
+      "change_pct": 0.0,
+      "support": 0.0008,
+      "resistance": 0.0008,
+      "volume_status": "Artıyor",
+      "trend": "Kararsız",
+      "comment": "Arbitrum Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.00%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 0.0008,
+          "volume": 0.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 0.0008,
+          "volume": 2.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Optimism",
       "symbol": "OPUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 0.105,
+      "change_pct": 0.7678,
+      "support": 0.091,
+      "resistance": 0.1091,
+      "volume_status": "Artıyor",
+      "trend": "Güçleniyor",
+      "comment": "Optimism Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.77%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 0.1238,
+          "volume": 56881464.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 0.1187,
+          "volume": 75429747.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 0.1186,
+          "volume": 59709731.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 0.1201,
+          "volume": 41085773.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 0.1183,
+          "volume": 44288198.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 0.1236,
+          "volume": 67624597.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 0.1154,
+          "volume": 92420423.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 0.123,
+          "volume": 90519314.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 0.1119,
+          "volume": 117707600.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 0.0975,
+          "volume": 98605692.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 0.0937,
+          "volume": 55103323.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 0.097,
+          "volume": 59494484.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 0.0958,
+          "volume": 51444492.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 0.0968,
+          "volume": 48435083.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 0.091,
+          "volume": 54777784.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 0.0951,
+          "volume": 45161080.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 0.0996,
+          "volume": 47511433.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 0.1071,
+          "volume": 75309663.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 0.1085,
+          "volume": 45482928.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 0.1086,
+          "volume": 52416722.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 0.1088,
+          "volume": 42893753.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 0.1086,
+          "volume": 53000568.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 0.1091,
+          "volume": 57997448.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 0.1035,
+          "volume": 48148989.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 0.1035,
+          "volume": 41109994.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 0.0995,
+          "volume": 29600236.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 0.1006,
+          "volume": 40743769.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 0.1012,
+          "volume": 39114447.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 0.1042,
+          "volume": 69796775.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 0.105,
+          "volume": 74661928.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "NEAR",
       "symbol": "NEARUSDT",
       "currency": " $",
-      "last_price": null,
-      "change_pct": null,
-      "support": null,
-      "resistance": null,
-      "volume_status": "Veri sınırlı",
-      "trend": "Veri sınırlı",
-      "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
-      "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "last_price": 1.913,
+      "change_pct": -2.4875,
+      "support": 1.8638,
+      "resistance": 2.3883,
+      "volume_status": "Normal",
+      "trend": "Zayıflıyor",
+      "comment": "NEAR Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -2.49%.",
+      "history": [
+        {
+          "date": "2026-05-27",
+          "close": 2.4949,
+          "volume": 937149159.0
+        },
+        {
+          "date": "2026-05-28",
+          "close": 2.4179,
+          "volume": 674363601.0
+        },
+        {
+          "date": "2026-05-29",
+          "close": 2.3785,
+          "volume": 899221159.0
+        },
+        {
+          "date": "2026-05-30",
+          "close": 2.2469,
+          "volume": 490396243.0
+        },
+        {
+          "date": "2026-05-31",
+          "close": 2.3225,
+          "volume": 497338359.0
+        },
+        {
+          "date": "2026-06-01",
+          "close": 2.6327,
+          "volume": 1024747639.0
+        },
+        {
+          "date": "2026-06-02",
+          "close": 2.6255,
+          "volume": 1094198515.0
+        },
+        {
+          "date": "2026-06-03",
+          "close": 2.8173,
+          "volume": 1373851565.0
+        },
+        {
+          "date": "2026-06-04",
+          "close": 2.1956,
+          "volume": 1236771441.0
+        },
+        {
+          "date": "2026-06-05",
+          "close": 1.9597,
+          "volume": 1065990336.0
+        },
+        {
+          "date": "2026-06-06",
+          "close": 1.8638,
+          "volume": 443793293.0
+        },
+        {
+          "date": "2026-06-07",
+          "close": 2.0533,
+          "volume": 666696863.0
+        },
+        {
+          "date": "2026-06-08",
+          "close": 2.1276,
+          "volume": 629391698.0
+        },
+        {
+          "date": "2026-06-09",
+          "close": 2.1582,
+          "volume": 510571447.0
+        },
+        {
+          "date": "2026-06-10",
+          "close": 1.9681,
+          "volume": 499073714.0
+        },
+        {
+          "date": "2026-06-11",
+          "close": 2.0645,
+          "volume": 474341868.0
+        },
+        {
+          "date": "2026-06-12",
+          "close": 2.0082,
+          "volume": 357571766.0
+        },
+        {
+          "date": "2026-06-13",
+          "close": 2.1284,
+          "volume": 297689478.0
+        },
+        {
+          "date": "2026-06-14",
+          "close": 2.2138,
+          "volume": 282810252.0
+        },
+        {
+          "date": "2026-06-15",
+          "close": 2.3883,
+          "volume": 612218935.0
+        },
+        {
+          "date": "2026-06-16",
+          "close": 2.3076,
+          "volume": 500118710.0
+        },
+        {
+          "date": "2026-06-17",
+          "close": 2.1769,
+          "volume": 433545984.0
+        },
+        {
+          "date": "2026-06-18",
+          "close": 2.2353,
+          "volume": 401972496.0
+        },
+        {
+          "date": "2026-06-19",
+          "close": 2.1868,
+          "volume": 289897159.0
+        },
+        {
+          "date": "2026-06-20",
+          "close": 2.1903,
+          "volume": 207353873.0
+        },
+        {
+          "date": "2026-06-21",
+          "close": 2.0998,
+          "volume": 262901375.0
+        },
+        {
+          "date": "2026-06-22",
+          "close": 2.0679,
+          "volume": 262975344.0
+        },
+        {
+          "date": "2026-06-23",
+          "close": 1.9793,
+          "volume": 279119409.0
+        },
+        {
+          "date": "2026-06-24",
+          "close": 1.9618,
+          "volume": 269436338.0
+        },
+        {
+          "date": "2026-06-25",
+          "close": 1.913,
+          "volume": 292103296.0
+        }
+      ],
+      "fallback_source": "Yahoo Finance spot fallback",
+      "futures_metrics": {
+        "data_ready": false,
+        "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+      }
     },
     {
       "name": "Aptos",
@@ -332,7 +2517,8 @@
       "trend": "Veri sınırlı",
       "comment": "Ücretsiz kaynaktan yeterli veri alınamadı. Veri yoksa yorum uydurulmaz.",
       "compare": "Dün-bugün karşılaştırması için veri sınırlı.",
-      "history": []
+      "history": [],
+      "fallback_source": "Yahoo Finance fallback başarısız"
     }
   ],
   "commodities": [
@@ -340,14 +2526,14 @@
       "name": "Altın",
       "symbol": "GC=F",
       "currency": " $",
-      "last_price": 3996.3999,
-      "change_pct": 0.1529,
+      "last_price": 4009.1001,
+      "change_pct": 0.4711,
       "support": 3990.3,
       "resistance": 4560.5,
       "volume_status": "Artıyor",
       "trend": "Kararsız",
       "comment": "Altın net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "compare": "Düne göre değişim +0.15%.",
+      "compare": "Düne göre değişim +0.47%.",
       "history": [
         {
           "date": "2026-05-13",
@@ -496,8 +2682,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 3996.3999,
-          "volume": 60142.0
+          "close": 4009.1001,
+          "volume": 66759.0
         }
       ]
     },
@@ -505,14 +2691,14 @@
       "name": "Brent Petrol",
       "symbol": "BZ=F",
       "currency": " $",
-      "last_price": 73.42,
-      "change_pct": -0.434,
-      "support": 73.42,
+      "last_price": 73.18,
+      "change_pct": -0.7594,
+      "support": 73.18,
       "resistance": 97.81,
       "volume_status": "Zayıf",
       "trend": "Zayıflıyor",
       "comment": "Brent Petrol net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "compare": "Düne göre değişim -0.43%.",
+      "compare": "Düne göre değişim -0.76%.",
       "history": [
         {
           "date": "2026-05-13",
@@ -661,8 +2847,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 73.42,
-          "volume": 13233.0
+          "close": 73.18,
+          "volume": 14138.0
         }
       ]
     }
@@ -672,14 +2858,14 @@
       "name": "SASA",
       "symbol": "SASA.IS",
       "currency": " ₺",
-      "last_price": 2.52,
-      "change_pct": -0.7874,
+      "last_price": 2.53,
+      "change_pct": -0.3937,
       "support": 2.49,
       "resistance": 2.78,
       "volume_status": "Artıyor",
-      "trend": "Zayıflıyor",
+      "trend": "Kararsız",
       "comment": "SASA net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "compare": "Düne göre değişim -0.79%.",
+      "compare": "Düne göre değişim -0.39%.",
       "history": [
         {
           "date": "2026-05-14",
@@ -828,8 +3014,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 2.52,
-          "volume": 1128317891.0
+          "close": 2.53,
+          "volume": 1185354885.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -995,7 +3181,7 @@
         {
           "date": "2026-06-25",
           "close": 2.77,
-          "volume": 27032866.0
+          "volume": 27329514.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -1004,14 +3190,14 @@
       "name": "HEKTAŞ",
       "symbol": "HEKTS.IS",
       "currency": " ₺",
-      "last_price": 3.46,
-      "change_pct": -5.2055,
-      "support": 3.46,
+      "last_price": 3.47,
+      "change_pct": -4.9315,
+      "support": 3.47,
       "resistance": 4.43,
       "volume_status": "Artıyor",
       "trend": "Zayıflıyor",
       "comment": "HEKTAŞ tarafında satış baskısı var. Destek kaybı risk artırır.",
-      "compare": "Düne göre değişim -5.21%.",
+      "compare": "Düne göre değişim -4.93%.",
       "history": [
         {
           "date": "2026-05-14",
@@ -1160,8 +3346,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 3.46,
-          "volume": 1114971393.0
+          "close": 3.47,
+          "volume": 1135811148.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -1170,8 +3356,8 @@
   "opportunities": [
     {
       "name": "SASA",
-      "change_pct": -0.7874,
-      "note": "Trend: Zayıflıyor. Hacim: Artıyor."
+      "change_pct": -0.3937,
+      "note": "Trend: Kararsız. Hacim: Artıyor."
     },
     {
       "name": "ZOREN",
@@ -1180,7 +3366,7 @@
     },
     {
       "name": "HEKTAŞ",
-      "change_pct": -5.2055,
+      "change_pct": -4.9315,
       "note": "Trend: Zayıflıyor. Hacim: Artıyor."
     },
     {
@@ -1221,8 +3407,198 @@
       "summary": "Makro tablo temkinli. TOTAL/TOTAL3 zayıflığı ve DXY etkisi short adaylarını öne çıkarabilir.",
       "missing_data": []
     },
-    "summary": "Temiz işlem adayı çıkmadı. Sistem NO TRADE modunda kalmayı önerir.",
-    "top_candidates": [],
+    "summary": "En güçlü aday: Avalanche SHORT (89.2/100).",
+    "top_candidates": [
+      {
+        "symbol": "AVAXUSDT",
+        "name": "Avalanche",
+        "direction": "SHORT",
+        "score": 89.2,
+        "action": "SHORT adayı",
+        "higher_tf": "4h / 1h",
+        "setup_tf": "30m / 15m",
+        "entry_tf": "5m",
+        "style": "Trend devamı",
+        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
+        "reasons": [
+          "Makro rejim: SHORT ağırlıklı / risk-off.",
+          "Trend: Zayıflıyor, hacim: Normal.",
+          "BTC'ye göre göreceli fark: -1.44 puan.",
+          "Delta oranı: -, taker al/sat: -.",
+          "OI değişim: -, funding: -.",
+          "Fiyat destek/direnç arasında.",
+          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
+        ],
+        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif delta/taker teyidi aranır.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 6.8695 $.",
+        "futures_metrics": {
+          "data_ready": false,
+          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+        }
+      },
+      {
+        "symbol": "NEARUSDT",
+        "name": "NEAR",
+        "direction": "SHORT",
+        "score": 87.6,
+        "action": "SHORT adayı",
+        "higher_tf": "4h / 1h",
+        "setup_tf": "30m / 15m",
+        "entry_tf": "5m",
+        "style": "Trend devamı",
+        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
+        "reasons": [
+          "Makro rejim: SHORT ağırlıklı / risk-off.",
+          "Trend: Zayıflıyor, hacim: Normal.",
+          "BTC'ye göre göreceli fark: -2.93 puan.",
+          "Delta oranı: -, taker al/sat: -.",
+          "OI değişim: -, funding: -.",
+          "Fiyat desteğe çok yakın; short için geç kalma riski var.",
+          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
+        ],
+        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif delta/taker teyidi aranır.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 2.3883 $.",
+        "futures_metrics": {
+          "data_ready": false,
+          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+        }
+      },
+      {
+        "symbol": "DOTUSDT",
+        "name": "Polkadot",
+        "direction": "SHORT",
+        "score": 80.8,
+        "action": "SHORT adayı",
+        "higher_tf": "4h / 1h",
+        "setup_tf": "30m / 15m",
+        "entry_tf": "5m",
+        "style": "Trend devamı",
+        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
+        "reasons": [
+          "Makro rejim: SHORT ağırlıklı / risk-off.",
+          "Trend: Zayıflıyor, hacim: Artıyor.",
+          "BTC'ye göre göreceli fark: -1.40 puan.",
+          "Delta oranı: -, taker al/sat: -.",
+          "OI değişim: -, funding: -.",
+          "Fiyat desteğe çok yakın; short için geç kalma riski var.",
+          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
+        ],
+        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif delta/taker teyidi aranır.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 1.0118 $.",
+        "futures_metrics": {
+          "data_ready": false,
+          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+        }
+      },
+      {
+        "symbol": "DOGEUSDT",
+        "name": "Dogecoin",
+        "direction": "SHORT",
+        "score": 73.4,
+        "action": "SHORT adayı",
+        "higher_tf": "4h / 1h",
+        "setup_tf": "30m / 15m",
+        "entry_tf": "5m",
+        "style": "Trend devamı",
+        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
+        "reasons": [
+          "Makro rejim: SHORT ağırlıklı / risk-off.",
+          "Trend: Zayıflıyor, hacim: Artıyor.",
+          "BTC'ye göre göreceli fark: -0.57 puan.",
+          "Delta oranı: -, taker al/sat: -.",
+          "OI değişim: -, funding: -.",
+          "Fiyat desteğe çok yakın; short için geç kalma riski var.",
+          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
+        ],
+        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif delta/taker teyidi aranır.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 0.0888 $.",
+        "futures_metrics": {
+          "data_ready": false,
+          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+        }
+      },
+      {
+        "symbol": "BNBUSDT",
+        "name": "BNB",
+        "direction": "SHORT",
+        "score": 73.3,
+        "action": "SHORT adayı",
+        "higher_tf": "4h / 1h",
+        "setup_tf": "30m / 15m",
+        "entry_tf": "5m",
+        "style": "Trend devamı",
+        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
+        "reasons": [
+          "Makro rejim: SHORT ağırlıklı / risk-off.",
+          "Trend: Zayıflıyor, hacim: Artıyor.",
+          "BTC'ye göre göreceli fark: -0.56 puan.",
+          "Delta oranı: -, taker al/sat: -.",
+          "OI değişim: -, funding: -.",
+          "Fiyat desteğe çok yakın; short için geç kalma riski var.",
+          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
+        ],
+        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif delta/taker teyidi aranır.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 617.4219 $.",
+        "futures_metrics": {
+          "data_ready": false,
+          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+        }
+      },
+      {
+        "symbol": "OPUSDT",
+        "name": "Optimism",
+        "direction": "SHORT",
+        "score": 69.4,
+        "action": "İzleme / SHORT eğilimi",
+        "higher_tf": "4h / 1h",
+        "setup_tf": "30m / 15m",
+        "entry_tf": "5m",
+        "style": "Trend devamı",
+        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
+        "reasons": [
+          "Makro rejim: SHORT ağırlıklı / risk-off.",
+          "Trend: Güçleniyor, hacim: Artıyor.",
+          "BTC'ye göre göreceli fark: +0.33 puan.",
+          "Delta oranı: -, taker al/sat: -.",
+          "OI değişim: -, funding: -.",
+          "Fiyat direnç bölgesine yakın; red teyidi aranabilir.",
+          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
+        ],
+        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif delta/taker teyidi aranır.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 0.1091 $.",
+        "futures_metrics": {
+          "data_ready": false,
+          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+        }
+      },
+      {
+        "symbol": "ARBUSDT",
+        "name": "Arbitrum",
+        "direction": "SHORT",
+        "score": 65.2,
+        "action": "İzleme / SHORT eğilimi",
+        "higher_tf": "1h",
+        "setup_tf": "15m",
+        "entry_tf": "5m / 3m",
+        "style": "Seçici kısa vade",
+        "timeframe_note": "Piyasa kararsız; destek/direnç teyidi olmadan işlem aranmaz.",
+        "reasons": [
+          "Makro rejim: SHORT ağırlıklı / risk-off.",
+          "Trend: Kararsız, hacim: Artıyor.",
+          "BTC'ye göre göreceli fark: -0.44 puan.",
+          "Delta oranı: -, taker al/sat: -.",
+          "OI değişim: -, funding: -.",
+          "Destek/direnç verisi sınırlı.",
+          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
+        ],
+        "entry_plan": "15m direnç retesti veya destek kırılımı beklenir. 5m / 3m negatif delta/taker teyidi aranır.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 0.0008 $.",
+        "futures_metrics": {
+          "data_ready": false,
+          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume"
+        }
+      }
+    ],
     "rules": [
       "Skor 70 üzeri: işlem adayı",
       "Skor 55-69: izleme adayı",
