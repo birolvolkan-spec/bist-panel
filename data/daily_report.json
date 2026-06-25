@@ -1,6 +1,6 @@
 {
   "report_date": "2026-06-25",
-  "updated_at": "14:50 Türkiye saati",
+  "updated_at": "14:51 Türkiye saati",
   "data_layer": {
     "crypto_source": "Binance USD-M Futures public data",
     "macro_source": "Yahoo Finance + CoinGecko global",
@@ -56,16 +56,16 @@
   "macro": [
     {
       "name": "DXY",
-      "change_pct": 0.1201,
+      "change_pct": 0.1014,
       "note": "DXY net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "value": 101.732,
+      "value": 101.713,
       "data_ready": true
     },
     {
       "name": "BIST 100",
-      "change_pct": 0.0791,
+      "change_pct": 0.0711,
       "note": "BIST 100 net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "value": 14342.54,
+      "value": 14341.3896,
       "data_ready": true
     },
     {
@@ -340,14 +340,14 @@
       "name": "Altın",
       "symbol": "GC=F",
       "currency": " $",
-      "last_price": 3997.6001,
-      "change_pct": 0.1829,
+      "last_price": 3999.2,
+      "change_pct": 0.223,
       "support": 3990.3,
       "resistance": 4560.5,
       "volume_status": "Artıyor",
       "trend": "Kararsız",
       "comment": "Altın net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "compare": "Düne göre değişim +0.18%.",
+      "compare": "Düne göre değişim +0.22%.",
       "history": [
         {
           "date": "2026-05-13",
@@ -496,8 +496,8 @@
         },
         {
           "date": "2026-06-25",
-          "close": 3997.6001,
-          "volume": 57489.0
+          "close": 3999.2,
+          "volume": 57576.0
         }
       ]
     },
@@ -662,7 +662,7 @@
         {
           "date": "2026-06-25",
           "close": 73.29,
-          "volume": 11750.0
+          "volume": 11755.0
         }
       ]
     }
@@ -829,7 +829,7 @@
         {
           "date": "2026-06-25",
           "close": 2.53,
-          "volume": 1035547019.0
+          "volume": 1050161017.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -995,7 +995,7 @@
         {
           "date": "2026-06-25",
           "close": 2.77,
-          "volume": 24370060.0
+          "volume": 24416137.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -1161,7 +1161,7 @@
         {
           "date": "2026-06-25",
           "close": 3.47,
-          "volume": 1055034541.0
+          "volume": 1055588093.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -1212,20 +1212,14 @@
     }
   ],
   "trade_recommendations": {
-    "engine_version": "v1.0",
+    "engine_version": "v2.0",
     "market_regime": {
-      "regime": "Kararsız / seçici",
-      "direction_bias": "MIXED",
-      "risk_on_score": 5,
-      "risk_off_score": 5,
-      "summary": "Makro tablo net yön üretmiyor. Coin bazlı güç-zayıflık ve destek/direnç teyidi daha önemli.",
-      "missing_data": [
-        "USDT.D",
-        "TOTAL2",
-        "TOTAL3",
-        "OI",
-        "Gerçek delta"
-      ]
+      "regime": "SHORT ağırlıklı / risk-off",
+      "direction_bias": "SHORT",
+      "risk_on_score": 0,
+      "risk_off_score": 53,
+      "summary": "Makro tablo temkinli. TOTAL/TOTAL3 zayıflığı ve DXY etkisi short adaylarını öne çıkarabilir.",
+      "missing_data": []
     },
     "summary": "Temiz işlem adayı çıkmadı. Sistem NO TRADE modunda kalmayı önerir.",
     "top_candidates": [],
@@ -1233,7 +1227,7 @@
       "Skor 70 üzeri: işlem adayı",
       "Skor 55-69: izleme adayı",
       "Skor 55 altı: pas",
-      "Delta/OI bağlanana kadar bu motor hacim ve fiyat davranışını proxy olarak kullanır",
+      "Delta, OI, taker al/sat ve funding skorlamaya dahil edilir",
       "Veri yoksa sistem uydurma sinyal üretmez"
     ]
   }
