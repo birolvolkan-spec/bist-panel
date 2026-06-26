@@ -8,6 +8,7 @@ on:
       - "requirements.txt"
       - ".github/workflows/daily.yml"
       - "index.html"
+      - "style.css"
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
@@ -39,6 +40,9 @@ jobs:
 
       - name: Repair crypto data with fallback if needed
         run: python scripts/crypto_fallback.py
+
+      - name: Patch Binance Futures metrics
+        run: python scripts/futures_patch.py
 
       - name: Add coin direction timeframe recommendations
         run: python scripts/add_recommendations.py
