@@ -44,6 +44,9 @@ jobs:
       - name: Patch Binance Futures metrics
         run: python scripts/futures_patch.py
 
+      - name: Build selectable comparison chart series
+        run: python scripts/build_chart_series.py
+
       - name: Add coin direction timeframe recommendations
         run: python scripts/add_recommendations.py
 
@@ -51,6 +54,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/daily_report.json
+          git add data/daily_report.json data/chart_series.json
           git diff --cached --quiet || git commit -m "Update daily market report"
           git push
