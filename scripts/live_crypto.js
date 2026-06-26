@@ -180,6 +180,87 @@ function ensureColorLegend() {
   decision.parentNode.insertBefore(box, decision.nextSibling);
 }
 
+function groupAvg(items) {
+  const values = (items || []).map(x => Number(x.change_pct)).filter(x => Number.isFinite(x));
+  if (!values.length) return null;
+  return values.reduce((a, b) => a + b, 0) / values.length;
+}
+
+function decisionForGroup(group, avg, hasData) {
+  if (!hasData || avg === null || avg === undefined || Number.isNaN(Number(avg))) {
+    return { label: 'VERİ SINIRLI', cls: 'neutral', note: 'Otomatik karar için yeterli veri yok.' };
+  }
+  const v = Number(avg);
+  if (group === 'KRİPTO') {
+    if (v > 0.75) return { label: 'LONG ARA', cls: 'good', note: 'Kripto sepeti pozitif. Long setup varsa değerlendir.' };
+    if (v < -0.75) return { label: 'SHORT ARA', cls: 'bad', note: 'Kripto sepeti zayıf. Short setup öncelikli.' };
+    return { label: 'SEÇİCİ', cls: 'neutral', note: 'Net yön yok. Sadece yüksek score setup.' };
+  }
+  if (group === 'BIST') {
+    if (v > 0.5) return { label: 'AL / POZİTİF', cls: 'good', note: 'BIST takip listesi pozitif. Destek üstü alım aranabilir.' };
+    if (v < -0.5) return { label: 'PAS / ZAYIF', cls: 'bad', note: 'BIST takip listesi zayıf. Yeni alımda seçici kal.' };
+    return { label: 'SEÇİCİ', cls: 'neutral', note: 'Net yön yok. Teyit bekle.' };
+  }
+  if (group === 'EMTİA') {
+    if (v > 0.4) return { label: 'AL / POZİTİF', cls: 'good', note: 'Altın/petrol sepeti pozitif.' };
+    if (v < -0.4) return { label: 'SAT / ZAYIF', cls: 'bad', note: 'Emtia sepeti zayıf.' };
+    return { label: 'SEÇİCİ', cls: 'neutral', note: 'Emtia tarafında net yön yok.' };
+  }
+  return { label: 'BEKLE', cls: 'neutral', note: 'Fon verisi otomatik karar için henüz sınırlı.' };
+}
+
+function ensureAssetDecisionBox() {
+  const decision = document.querySelector('.decision.card');
+  if (!decision || !decision.parentNode) return null;
+  let box = document.getElementById('assetDecisionBox');
+  if (!box) {
+    box = document.createElement('section');
+    box.className = 'card';
+    box.id = 'assetDecisionBox';
+    decision.parentNode.insertBefore(box, decision.nextSibling);
+  }
+  return box;
+}
+
+function renderAssetDecisionBox(data) {
+  const box = ensureAssetDecisionBox();
+  if (!box || !data) return;
+  const cryptoAvg = groupAvg(data.crypto);
+  const bistAvg = groupAvg(data.bist);
+  const emtiaAvg = groupAvg(data.commodities);
+  const decisions = [
+    { group: 'KRİPTO', avg: cryptoAvg, ...decisionForGroup('KRİPTO', cryptoAvg, (data.crypto || []).length > 0) },
+    { group: 'BIST', avg: bistAvg, ...decisionForGroup('BIST', bistAvg, (data.bist || []).length > 0) },
+    { group: 'EMTİA', avg: emtiaAvg, ...decisionForGroup('EMTİA', emtiaAvg, (data.commodities || []).length > 0) },
+    { group: 'FON', avg: null, ...decisionForGroup('FON', null, false) },
+  ];
+  const cards = decisions.map(d => `
+    <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:12px;">
+      <span class="miniCategory">${d.group}</span>
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:4px;">
+        <strong>${d.group}</strong>
+        <span class="badge ${d.cls}">${d.label}</span>
+      </div>
+      <p style="color:#9aa8c7;font-size:13px;margin:8px 0 0;line-height:1.35;">Ortalama: ${d.avg === null || d.avg === undefined ? '-' : livePct(d.avg)}<br>${d.note}</p>
+    </div>`).join('');
+  box.innerHTML = `
+    <p class="eyebrow">Bugünün Kararı - Varlık Bazlı</p>
+    <h2>Hangi piyasa için ne yapılmalı?</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;" class="assetDecisionGrid">${cards}</div>
+    <p class="muted smallNote">Genel karar tek başına işlem açtırmaz. Kripto için gerçek işlem kararı ayrıca Volkan Edge setup/score motorundan gelir.</p>
+  `;
+}
+
+async function loadAssetDecisionBox() {
+  try {
+    const data = await fetchJson('data/daily_report.json?v=' + Date.now());
+    renderAssetDecisionBox(data);
+  } catch (err) {
+    const box = ensureAssetDecisionBox();
+    if (box) box.innerHTML = `<p class="eyebrow">Bugünün Kararı - Varlık Bazlı</p><p class="empty">Grup kararları yüklenemedi: ${err.message}</p>`;
+  }
+}
+
 function applyCategoryLabels() {
   ensureColorLegend();
   addTagsToCards('cryptoCards', 'KRİPTO');
@@ -193,8 +274,10 @@ function applyCategoryLabels() {
 
 window.addEventListener('load', () => {
   loadLiveCrypto();
+  loadAssetDecisionBox();
   applyCategoryLabels();
   setTimeout(applyCategoryLabels, 800);
 });
 setInterval(loadLiveCrypto, 30 * 1000);
+setInterval(loadAssetDecisionBox, 5 * 60 * 1000);
 setInterval(applyCategoryLabels, 2000);
