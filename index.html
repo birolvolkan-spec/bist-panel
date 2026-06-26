@@ -13,7 +13,7 @@
       <p class="eyebrow">VOLKAN DAILY RADAR</p>
       <h1>Günlük Piyasa Raporu</h1>
       <p id="reportDate">Yükleniyor...</p>
-      <p class="muted" id="autoInfo">Arka plan raporu 15 dakikada bir üretilir. Ekran açıkken son rapor otomatik tekrar yüklenir.</p>
+      <p class="muted" id="autoInfo">GitHub raporu periyodik üretilir. Canlı kripto kutusu ekran açıkken tarayıcıdan 30 saniyede bir yenilenir.</p>
     </div>
     <button id="refreshBtn">Son raporu tekrar yükle</button>
   </header>
@@ -26,6 +26,24 @@
         <p id="dailySummary"></p>
       </div>
       <div class="riskBox" id="riskLevel">-</div>
+    </section>
+
+    <section class="card">
+      <div class="sectionTitle compactTitle">
+        <div>
+          <p class="eyebrow">Canlı Kripto Akışı</p>
+          <h2>Binance Futures canlı görünüm</h2>
+        </div>
+        <p id="liveCryptoStatus" class="muted">Canlı veri bekleniyor...</p>
+      </div>
+      <div id="liveCryptoBox" class="dataTable"><p class="empty">Canlı akış yükleniyor...</p></div>
+      <p class="muted smallNote">Bu kutu GitHub JSON’u değil, tarayıcı açıkken Binance public endpointlerinden okumayı dener. Tarayıcı/ülke/CORS engeli olursa son rapor gösterilmeye devam eder.</p>
+    </section>
+
+    <section class="card" id="dataHealthBox">
+      <p class="eyebrow">Veri Durumu</p>
+      <div id="dataLayerInfo" class="chips"></div>
+      <div id="dataCompleteness" class="list"></div>
     </section>
 
     <section class="card" id="weeklyBox">
@@ -41,7 +59,7 @@
     </section>
 
     <section>
-      <div class="sectionTitle"><h2>Kripto</h2><p>BTC, ETH, SOL, BNB, OP</p></div>
+      <div class="sectionTitle"><h2>Kripto</h2><p>Fiyat + hacim + trend + futures metrikleri</p></div>
       <div id="cryptoCards" class="assetGrid"></div>
     </section>
 
@@ -62,7 +80,7 @@
 
     <section class="card muted">
       <p class="eyebrow">Not</p>
-      <p>Bu panel yatırım tavsiyesi değildir. Veri olmayan yerde sistem yorum uydurmaz; “sınırlı veri” olarak gösterir.</p>
+      <p>Bu panel yatırım tavsiyesi değildir. Veri olmayan yerde sistem yorum uydurmaz; “sınırlı veri” olarak gösterir. Gerçek anlık alarm/paper bot için GitHub Pages yeterli değildir; VPS veya Telegram/worker katmanı gerekir.</p>
     </section>
   </main>
 
@@ -72,7 +90,7 @@
     function fmt(n, suffix = '') {
       if (n === null || n === undefined || Number.isNaN(Number(n))) return '-';
       const value = Number(n);
-      return value.toLocaleString('tr-TR', { maximumFractionDigits: 2 }) + suffix;
+      return value.toLocaleString('tr-TR', { maximumFractionDigits: 4 }) + suffix;
     }
 
     function pct(n) {
@@ -105,8 +123,29 @@
     function itemRow(item) {
       const div = document.createElement('div');
       div.className = 'row';
-      div.innerHTML = `<div><strong>${item.name}</strong><p>${item.note || ''}</p></div><span class="badge ${badgeClass(item.change_pct)}">${pct(item.change_pct)}</span>`;
+      const valueText = item.value !== undefined && item.value !== null ? `<p>Değer: ${fmt(item.value)}</p>` : '';
+      div.innerHTML = `<div><strong>${item.name}</strong><p>${item.note || ''}</p>${valueText}</div><span class="badge ${badgeClass(item.change_pct)}">${pct(item.change_pct)}</span>`;
       return div;
+    }
+
+    function metricCell(label, value, suffix = '') {
+      return `<div><span>${label}</span><strong>${fmt(value, suffix)}</strong></div>`;
+    }
+
+    function renderFuturesMetrics(asset) {
+      const m = asset.futures_metrics || {};
+      if (!m || Object.keys(m).length === 0) return '';
+      return `
+        <div class="comment"><strong>Futures metrikleri</strong></div>
+        <div class="levels metricsGrid">
+          ${metricCell('Mark', m.mark_price, asset.currency || ' $')}
+          ${metricCell('Funding', m.funding_rate_pct, '%')}
+          ${metricCell('OI', m.open_interest, '')}
+          ${metricCell('OI Değişim', m.open_interest_change_pct, '%')}
+          ${metricCell('Taker A/S', m.taker_buy_sell_ratio, '')}
+          ${metricCell('Delta', m.last_delta_ratio_pct, '%')}
+        </div>
+        <div class="comment small"><strong>Veri kaynağı:</strong> ${m.source || asset.fallback_source || 'Bilinmiyor'} ${asset.delta_note ? '<br>' + asset.delta_note : ''}</div>`;
     }
 
     function renderAsset(container, asset) {
@@ -124,8 +163,10 @@
           <div><span>Hacim</span><strong>${asset.volume_status || '-'}</strong></div>
           <div><span>Trend</span><strong>${asset.trend || '-'}</strong></div>
         </div>
+        ${renderFuturesMetrics(asset)}
         <div class="comment"><strong>Yorum:</strong> ${asset.comment || 'Yorum yok.'}</div>
         <div class="comment small"><strong>Dün → Bugün:</strong> ${asset.compare || 'Karşılaştırma yok.'}</div>
+        ${asset.fallback_source ? `<div class="bistExtra"><strong>Yedek veri</strong><p>${asset.fallback_source}</p></div>` : ''}
         ${asset.bist_extra ? `<div class="bistExtra"><strong>BIST veri notu</strong><p>${asset.bist_extra}</p></div>` : ''}`;
       container.appendChild(card);
       const labels = (asset.history || []).map(x => x.date);
@@ -138,6 +179,34 @@
       el.innerHTML = '';
       (items || []).forEach(i => el.appendChild(itemRow(i)));
       if (!items || !items.length) el.innerHTML = '<p class="empty">Veri yok.</p>';
+    }
+
+    function renderDataHealth(data) {
+      const layer = data.data_layer || {};
+      const chips = document.getElementById('dataLayerInfo');
+      const list = document.getElementById('dataCompleteness');
+      chips.innerHTML = '';
+      list.innerHTML = '';
+
+      const chipItems = [
+        `Kripto kaynak: ${layer.crypto_source || '-'}`,
+        `Makro kaynak: ${layer.macro_source || '-'}`,
+        `Fallback: ${layer.crypto_fallback || 'Yok'}`
+      ];
+      chipItems.forEach(x => { const span = document.createElement('span'); span.textContent = x; chips.appendChild(span); });
+
+      const crypto = data.crypto || [];
+      const macro = data.macro || [];
+      const futuresReady = crypto.filter(a => a.futures_metrics && a.futures_metrics.data_ready).length;
+      const priceReady = crypto.filter(a => a.last_price !== null && a.last_price !== undefined).length;
+      const macroReady = macro.filter(a => a.data_ready || a.value !== null || a.change_pct !== null).length;
+
+      [
+        {name: 'Kripto fiyat verisi', note: `${priceReady}/${crypto.length} coin dolu`, change_pct: null},
+        {name: 'Futures metrikleri', note: `${futuresReady}/${crypto.length} coin funding/OI/delta/taker verisi dolu`, change_pct: null},
+        {name: 'Makro veri', note: `${macroReady}/${macro.length} makro alan dolu`, change_pct: null},
+        {name: 'Rapor tipi', note: 'GitHub raporu periyodik statik JSON’dur; canlı akış ayrı kutudadır.', change_pct: null}
+      ].forEach(i => list.appendChild(itemRow(i)));
     }
 
     async function loadReport() {
@@ -153,6 +222,7 @@
       const weeklyItems = document.getElementById('weeklyItems');
       weeklyItems.innerHTML = '';
       (data.weekly_report?.items || []).forEach(x => { const span = document.createElement('span'); span.textContent = x; weeklyItems.appendChild(span); });
+      renderDataHealth(data);
       renderList('macroList', data.macro);
       renderList('compareList', data.comparison);
       renderList('opportunities', data.opportunities);
@@ -171,5 +241,6 @@
     setInterval(loadReport, 5 * 60 * 1000);
   </script>
   <script src="scripts/recommendations_ui.js"></script>
+  <script src="scripts/live_crypto.js"></script>
 </body>
 </html>
