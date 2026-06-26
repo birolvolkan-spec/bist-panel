@@ -76,5 +76,16 @@ async function loadTradeRecommendations() {
   }
 }
 
-window.addEventListener('load', loadTradeRecommendations);
+function loadComparisonChartScript() {
+  if (document.getElementById('chartSelectorScript')) return;
+  const s = document.createElement('script');
+  s.id = 'chartSelectorScript';
+  s.src = 'scripts/chart_selector.js?v=10';
+  document.body.appendChild(s);
+}
+
+window.addEventListener('load', () => {
+  loadTradeRecommendations();
+  loadComparisonChartScript();
+});
 setInterval(loadTradeRecommendations, 5 * 60 * 1000);
