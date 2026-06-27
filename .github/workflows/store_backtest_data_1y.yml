@@ -1,0 +1,87 @@
+name: Store 1Y Futures Backtest Data In GitHub
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "How many days to fetch"
+        required: true
+        default: "365"
+      interval:
+        description: "Binance kline interval"
+        required: true
+        default: "1m"
+      symbols:
+        description: "Comma separated symbols"
+        required: true
+        default: "BTCUSDT,ETHUSDT,SOLUSDT,BNBUSDT,XRPUSDT,ADAUSDT,DOGEUSDT,AVAXUSDT,LINKUSDT,DOTUSDT,LTCUSDT,ARBUSDT,OPUSDT,NEARUSDT,APTUSDT"
+      start:
+        description: "Optional UTC start date YYYY-MM-DD. Leave empty to use days."
+        required: false
+        default: ""
+      end:
+        description: "Optional UTC end date YYYY-MM-DD exclusive. Leave empty for current UTC midnight."
+        required: false
+        default: ""
+      target_branch:
+        description: "Branch where data will be stored"
+        required: true
+        default: "backtest-data"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: store-backtest-data
+  cancel-in-progress: false
+
+jobs:
+  store-backtest-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests==2.32.4
+
+      - name: Build monthly CSV data pool outside repo
+        run: |
+          rm -rf /tmp/volkan_backtest_data
+          python scripts/build_backtest_pool_monthly.py \
+            --out /tmp/volkan_backtest_data \
+            --days "${{ github.event.inputs.days }}" \
+            --interval "${{ github.event.inputs.interval }}" \
+            --symbols "${{ github.event.inputs.symbols }}" \
+            --start "${{ github.event.inputs.start }}" \
+            --end "${{ github.event.inputs.end }}"
+
+      - name: Switch to data branch
+        run: |
+          BRANCH="${{ github.event.inputs.target_branch }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin "$BRANCH" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
+            git checkout "$BRANCH"
+            git pull origin "$BRANCH" --ff-only || true
+          else
+            git checkout --orphan "$BRANCH"
+            git rm -rf . || true
+          fi
+
+      - name: Copy data into branch and commit
+        run: |
+          rsync -a --delete /tmp/volkan_backtest_data/ ./
+          git add README.md manifest.json futures/
+          git status --short
+          git diff --cached --quiet || git commit -m "Store 1Y futures backtest data"
+          git push origin "${{ github.event.inputs.target_branch }}"
