@@ -27,6 +27,11 @@ on:
         description: "Branch where data will be stored"
         required: true
         default: "backtest-data"
+  push:
+    branches: ["main"]
+    paths:
+      - "scripts/build_backtest_pool_monthly.py"
+      - ".github/workflows/store_backtest_data_1y.yml"
 
 permissions:
   contents: write
@@ -40,6 +45,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
+      - name: Resolve inputs
+        id: vars
+        run: |
+          DAYS="${{ github.event.inputs.days }}"
+          INTERVAL="${{ github.event.inputs.interval }}"
+          SYMBOLS="${{ github.event.inputs.symbols }}"
+          START_DATE="${{ github.event.inputs.start }}"
+          END_DATE="${{ github.event.inputs.end }}"
+          TARGET_BRANCH="${{ github.event.inputs.target_branch }}"
+          echo "days=${DAYS:-365}" >> "$GITHUB_OUTPUT"
+          echo "interval=${INTERVAL:-1m}" >> "$GITHUB_OUTPUT"
+          echo "symbols=${SYMBOLS:-BTCUSDT,ETHUSDT,SOLUSDT,BNBUSDT,XRPUSDT,ADAUSDT,DOGEUSDT,AVAXUSDT,LINKUSDT,DOTUSDT,LTCUSDT,ARBUSDT,OPUSDT,NEARUSDT,APTUSDT}" >> "$GITHUB_OUTPUT"
+          echo "start=${START_DATE}" >> "$GITHUB_OUTPUT"
+          echo "end=${END_DATE}" >> "$GITHUB_OUTPUT"
+          echo "target_branch=${TARGET_BRANCH:-backtest-data}" >> "$GITHUB_OUTPUT"
+
       - name: Checkout main branch
         uses: actions/checkout@v4
         with:
@@ -53,20 +74,20 @@ jobs:
       - name: Install dependencies
         run: pip install requests==2.32.4
 
-      - name: Build monthly CSV data pool outside repo
+      - name: Build monthly compressed CSV data pool outside repo
         run: |
           rm -rf /tmp/volkan_backtest_data
           python scripts/build_backtest_pool_monthly.py \
             --out /tmp/volkan_backtest_data \
-            --days "${{ github.event.inputs.days }}" \
-            --interval "${{ github.event.inputs.interval }}" \
-            --symbols "${{ github.event.inputs.symbols }}" \
-            --start "${{ github.event.inputs.start }}" \
-            --end "${{ github.event.inputs.end }}"
+            --days "${{ steps.vars.outputs.days }}" \
+            --interval "${{ steps.vars.outputs.interval }}" \
+            --symbols "${{ steps.vars.outputs.symbols }}" \
+            --start "${{ steps.vars.outputs.start }}" \
+            --end "${{ steps.vars.outputs.end }}"
 
       - name: Switch to data branch
         run: |
-          BRANCH="${{ github.event.inputs.target_branch }}"
+          BRANCH="${{ steps.vars.outputs.target_branch }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git fetch origin "$BRANCH" || true
@@ -81,7 +102,7 @@ jobs:
       - name: Copy data into branch and commit
         run: |
           rsync -a --delete /tmp/volkan_backtest_data/ ./
-          git add README.md manifest.json futures/
+          git add -A
           git status --short
-          git diff --cached --quiet || git commit -m "Store 1Y futures backtest data"
-          git push origin "${{ github.event.inputs.target_branch }}"
+          git diff --cached --quiet || git commit -m "Store 1Y compressed futures backtest data"
+          git push origin "${{ steps.vars.outputs.target_branch }}"
