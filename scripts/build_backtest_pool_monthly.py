@@ -1,5 +1,6 @@
 import argparse
 import csv
+import gzip
 import json
 import time
 from datetime import datetime, timedelta, timezone
@@ -88,7 +89,7 @@ def get_klines(symbol, interval, start_ms, end_ms, limit=1500):
     return [], None, last_error
 
 
-def fetch_csv(symbol, interval, start_dt, end_dt, csv_path, sleep_s):
+def fetch_csv_gz(symbol, interval, start_dt, end_dt, csv_path, sleep_s):
     start_ms = utc_ms(start_dt)
     end_ms = utc_ms(end_dt)
     cursor = start_ms
@@ -101,7 +102,7 @@ def fetch_csv(symbol, interval, start_dt, end_dt, csv_path, sleep_s):
     errors = []
     bases_used = set()
 
-    with csv_path.open("w", newline="", encoding="utf-8") as f:
+    with gzip.open(csv_path, "wt", newline="", encoding="utf-8", compresslevel=6) as f:
         writer = csv.writer(f)
         writer.writerow(CSV_HEADER)
 
@@ -186,26 +187,27 @@ def main():
         "end_utc_exclusive": end_dt.isoformat(),
         "days": (end_dt - start_dt).days,
         "symbols": symbols,
-        "storage": "monthly_csv_chunks_committed_to_backtest_data_branch",
+        "storage": "monthly_csv_gz_chunks_committed_to_backtest_data_branch",
         "notes": [
             "CSV timestamps are UTC.",
-            "Files are split monthly to avoid GitHub single-file size limits.",
-            "Each CSV contains OHLCV plus quote volume, trade count and taker buy fields from Binance Futures klines.",
+            "Files are split monthly and gzip-compressed to keep GitHub storage practical.",
+            "Each CSV.GZ contains OHLCV plus quote volume, trade count and taker buy fields from Binance Futures klines.",
+            "Pandas can read directly with pd.read_csv(path_to_csv_gz).",
             "This data pool is for backtests; fee/slippage/spread/execution must be modeled by the backtest engine.",
         ],
         "files": [],
     }
 
     out.mkdir(parents=True, exist_ok=True)
-    print(f"Building monthly data pool to {out}")
+    print(f"Building monthly compressed data pool to {out}")
     print(f"Symbols={len(symbols)} interval={args.interval} range={start_dt.date()}->{end_dt.date()} exclusive")
 
     for s_idx, symbol in enumerate(symbols, start=1):
         for m_start, m_end in iter_month_ranges(start_dt, end_dt):
             ym = m_start.strftime("%Y-%m")
-            csv_path = data_root / symbol / f"{symbol}-{args.interval}-{ym}.csv"
+            csv_path = data_root / symbol / f"{symbol}-{args.interval}-{ym}.csv.gz"
             print(f"[{s_idx}/{len(symbols)}] {symbol} {ym}")
-            info = fetch_csv(symbol, args.interval, m_start, m_end, csv_path, args.sleep)
+            info = fetch_csv_gz(symbol, args.interval, m_start, m_end, csv_path, args.sleep)
             rel = csv_path.relative_to(out).as_posix()
             info.update({
                 "symbol": symbol,
@@ -225,7 +227,8 @@ def main():
         f"Aralık UTC: {start_dt.date()} -> {end_dt.date()} exclusive\n\n"
         f"Interval: `{args.interval}`\n\n"
         f"Coinler: {', '.join(symbols)}\n\n"
-        "Dosyalar aylık CSV parçalarıdır: `futures/1m/SYMBOL/SYMBOL-1m-YYYY-MM.csv`.\n\n"
+        "Dosyalar aylık sıkıştırılmış CSV parçalarıdır: `futures/1m/SYMBOL/SYMBOL-1m-YYYY-MM.csv.gz`.\n\n"
+        "Pandas doğrudan okuyabilir: `pd.read_csv('...csv.gz')`.\n\n"
         "Kontrol için `manifest.json` içindeki satır ve coverage değerlerine bak.\n",
         encoding="utf-8",
     )
