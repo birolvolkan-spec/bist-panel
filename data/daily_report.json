@@ -1,6 +1,6 @@
 {
   "report_date": "2026-07-13",
-  "updated_at": "13:50 Türkiye saati",
+  "updated_at": "16:12 Türkiye saati",
   "data_layer": {
     "crypto_source": "Binance USD-M Futures public data",
     "macro_source": "Yahoo Finance + CoinGecko global",
@@ -39,7 +39,7 @@
       "delta_ratio"
     ],
     "crypto_fallback": "Yahoo Finance spot fallback fills price/volume when Binance Futures is unavailable from GitHub Actions",
-    "futures_patch_updated_at": "2026-07-13T10:51:50Z",
+    "futures_patch_updated_at": "2026-07-13T13:13:46Z",
     "futures_patch_ready_count": 0,
     "futures_patch_symbols": 15,
     "futures_patch_note": "Tries fapi, fapi1, fapi2, fapi3, fapi4 for premium/OI/taker/delta."
@@ -54,65 +54,65 @@
     "summary": "Pazartesi günleri haftalık yön, güçlenenler ve zayıflayanlar özetlenir. Diğer günlerde haftanın mevcut izleme durumu gösterilir.",
     "items": [
       "Kripto ortalama: 0.00%",
-      "BIST öncelik ortalama: 0.63%",
+      "BIST öncelik ortalama: 0.90%",
       "Delta/OI/Funding verisi coin öneri motoruna aktarılır"
     ]
   },
   "macro": [
     {
       "name": "DXY",
-      "change_pct": -0.0515,
+      "change_pct": -0.0753,
       "note": "DXY net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "value": 100.918,
+      "value": 100.894,
       "data_ready": true
     },
     {
       "name": "BIST 100",
-      "change_pct": -1.7515,
+      "change_pct": -1.8068,
       "note": "BIST 100 tarafında satış baskısı var. Destek kaybı risk artırır.",
-      "value": 14070.3701,
+      "value": 14062.4502,
       "data_ready": true
     },
     {
       "name": "TOTAL",
-      "change_pct": -1.1391,
-      "note": "Toplam kripto piyasa değeri yaklaşık 2,249,639,042,968.3 USD.",
-      "value": 2249639042968.3,
+      "change_pct": -1.843,
+      "note": "Toplam kripto piyasa değeri yaklaşık 2,239,976,345,518.96 USD.",
+      "value": 2239976345518.96,
       "data_ready": true
     },
     {
       "name": "TOTAL2",
-      "change_pct": -1.1391,
-      "note": "BTC hariç piyasa değeri yaklaşık 987,488,056,467.11 USD. Altcoin geniş piyasa gücü için izlenir.",
-      "value": 987488056467.11,
+      "change_pct": -1.843,
+      "note": "BTC hariç piyasa değeri yaklaşık 984,877,279,550.47 USD. Altcoin geniş piyasa gücü için izlenir.",
+      "value": 984877279550.47,
       "data_ready": true
     },
     {
       "name": "TOTAL3",
-      "change_pct": -1.1391,
-      "note": "BTC ve ETH hariç piyasa değeri yaklaşık 772,789,255,123.34 USD. Altcoin risk iştahı için ana filtredir.",
-      "value": 772789255123.34,
+      "change_pct": -1.843,
+      "note": "BTC ve ETH hariç piyasa değeri yaklaşık 771,201,455,998.72 USD. Altcoin risk iştahı için ana filtredir.",
+      "value": 771201455998.72,
       "data_ready": true
     },
     {
       "name": "BTC Dominance",
       "change_pct": null,
-      "note": "BTC piyasa payı yaklaşık %56.1046. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir.",
-      "value": 56.1046,
+      "note": "BTC piyasa payı yaklaşık %56.0318. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir.",
+      "value": 56.0318,
       "data_ready": true
     },
     {
       "name": "ETH Dominance",
       "change_pct": null,
-      "note": "ETH piyasa payı yaklaşık %9.5437. Altcoin iştahı için izlenir.",
-      "value": 9.5437,
+      "note": "ETH piyasa payı yaklaşık %9.5392. Altcoin iştahı için izlenir.",
+      "value": 9.5392,
       "data_ready": true
     },
     {
       "name": "USDT.D",
       "change_pct": null,
-      "note": "USDT piyasa payı yaklaşık %8.1725. Yükseliş riskten kaçışı, düşüş risk iştahını gösterebilir.",
-      "value": 8.1725,
+      "note": "USDT piyasa payı yaklaşık %8.2222. Yükseliş riskten kaçışı, düşüş risk iştahını gösterebilir.",
+      "value": 8.2222,
       "data_ready": true
     }
   ],
@@ -124,7 +124,7 @@
     },
     {
       "name": "BIST öncelikli ortalama",
-      "change_pct": 0.6292,
+      "change_pct": 0.9047,
       "note": "SASA, ZOREN ve HEKTAŞ takip listesinin ortalama değişimi."
     }
   ],
@@ -1502,7 +1502,7 @@
         "data_ready": false,
         "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume",
         "status_note": "Binance Futures public endpoints returned no usable futures metrics",
-        "patch_error_sample": "https://fapi3.binance.com -> Expecting value: line 1 column 1 (char 0) | https://fapi4.binance.com -> Expecting value: line 1 column 1 (char 0)"
+        "patch_error_sample": "https://fapi3.binance.com -> HTTP 429:  | https://fapi4.binance.com -> HTTP 429: "
       }
     },
     {
@@ -2564,14 +2564,14 @@
       "name": "Altın",
       "symbol": "GC=F",
       "currency": " $",
-      "last_price": 4074.6001,
-      "change_pct": -0.7188,
+      "last_price": 4072.3,
+      "change_pct": -0.7748,
       "support": 3990.3,
       "resistance": 4358.8999,
       "volume_status": "Artıyor",
       "trend": "Zayıflıyor",
       "comment": "Altın net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "compare": "Düne göre değişim -0.72%.",
+      "compare": "Düne göre değişim -0.77%.",
       "history": [
         {
           "date": "2026-05-29",
@@ -2720,8 +2720,8 @@
         },
         {
           "date": "2026-07-13",
-          "close": 4074.6001,
-          "volume": 48830.0
+          "close": 4072.3,
+          "volume": 63834.0
         }
       ]
     },
@@ -2729,14 +2729,14 @@
       "name": "Brent Petrol",
       "symbol": "BZ=F",
       "currency": " $",
-      "last_price": 78.37,
-      "change_pct": 3.1049,
+      "last_price": 78.55,
+      "change_pct": 3.3417,
       "support": 71.57,
       "resistance": 87.33,
       "volume_status": "Zayıf",
       "trend": "Güçleniyor",
       "comment": "Brent Petrol tarafında alıcılar güçleniyor. Direnç üstü kalıcılık izlenmeli.",
-      "compare": "Düne göre değişim +3.10%.",
+      "compare": "Düne göre değişim +3.34%.",
       "history": [
         {
           "date": "2026-05-29",
@@ -2885,8 +2885,8 @@
         },
         {
           "date": "2026-07-13",
-          "close": 78.37,
-          "volume": 14177.0
+          "close": 78.55,
+          "volume": 19320.0
         }
       ]
     }
@@ -2896,14 +2896,14 @@
       "name": "SASA",
       "symbol": "SASA.IS",
       "currency": " ₺",
-      "last_price": 2.51,
-      "change_pct": 3.719,
+      "last_price": 2.53,
+      "change_pct": 4.5455,
       "support": 2.23,
       "resistance": 2.78,
       "volume_status": "Artıyor",
       "trend": "Kararsız",
       "comment": "SASA net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "compare": "Düne göre değişim +3.72%.",
+      "compare": "Düne göre değişim +4.55%.",
       "history": [
         {
           "date": "2026-06-02",
@@ -3052,8 +3052,8 @@
         },
         {
           "date": "2026-07-13",
-          "close": 2.51,
-          "volume": 2706703807.0
+          "close": 2.53,
+          "volume": 3194962540.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -3219,7 +3219,7 @@
         {
           "date": "2026-07-13",
           "close": 2.68,
-          "volume": 28591153.0
+          "volume": 31477440.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -3232,7 +3232,7 @@
       "change_pct": 0.0,
       "support": 3.0,
       "resistance": 4.16,
-      "volume_status": "Zayıf",
+      "volume_status": "Normal",
       "trend": "Kararsız",
       "comment": "HEKTAŞ net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
       "compare": "Düne göre değişim +0.00%.",
@@ -3385,7 +3385,7 @@
         {
           "date": "2026-07-13",
           "close": 3.03,
-          "volume": 303281962.0
+          "volume": 353199039.0
         }
       ],
       "bist_extra": "Fiyat ve hacim gecikmeli günlük veriyle izleniyor. Yabancı para akışı, kurum dağılımı, kademe ve takas detayı veri kaynağına bağlıdır; veri yoksa uydurulmaz."
@@ -3394,13 +3394,13 @@
   "opportunities": [
     {
       "name": "SASA",
-      "change_pct": 3.719,
+      "change_pct": 4.5455,
       "note": "Trend: Kararsız. Hacim: Artıyor."
     },
     {
       "name": "HEKTAŞ",
       "change_pct": 0.0,
-      "note": "Trend: Kararsız. Hacim: Zayıf."
+      "note": "Trend: Kararsız. Hacim: Normal."
     },
     {
       "name": "ZOREN",
@@ -3678,7 +3678,7 @@
           "data_ready": false,
           "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume",
           "status_note": "Binance Futures public endpoints returned no usable futures metrics",
-          "patch_error_sample": "https://fapi3.binance.com -> Expecting value: line 1 column 1 (char 0) | https://fapi4.binance.com -> Expecting value: line 1 column 1 (char 0)"
+          "patch_error_sample": "https://fapi3.binance.com -> HTTP 429:  | https://fapi4.binance.com -> HTTP 429: "
         }
       }
     ],
