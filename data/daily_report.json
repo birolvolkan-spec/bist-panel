@@ -1,6 +1,6 @@
 {
   "report_date": "2026-09-09",
-  "updated_at": "20:48 Türkiye saati",
+  "updated_at": "23:11 Türkiye saati",
   "data_layer": {
     "crypto_source": "Binance USD-M Futures public data",
     "macro_source": "Yahoo Finance + CoinGecko global",
@@ -39,7 +39,7 @@
       "delta_ratio"
     ],
     "crypto_fallback": "Yahoo Finance spot fallback fills price/volume when Binance Futures is unavailable from GitHub Actions",
-    "futures_patch_updated_at": "2026-09-09T17:51:06Z",
+    "futures_patch_updated_at": "2026-09-09T20:13:17Z",
     "futures_patch_ready_count": 0,
     "futures_patch_symbols": 15,
     "futures_patch_note": "Tries fapi, fapi1, fapi2, fapi3, fapi4 for premium/OI/taker/delta."
@@ -61,9 +61,9 @@
   "macro": [
     {
       "name": "DXY",
-      "change_pct": -0.0789,
+      "change_pct": -0.0152,
       "note": "DXY net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "value": 98.762,
+      "value": 98.825,
       "data_ready": true
     },
     {
@@ -75,44 +75,44 @@
     },
     {
       "name": "TOTAL",
-      "change_pct": -2.8354,
-      "note": "Toplam kripto piyasa değeri yaklaşık 2,701,533,351,562.69 USD.",
-      "value": 2701533351562.69,
+      "change_pct": -3.0665,
+      "note": "Toplam kripto piyasa değeri yaklaşık 2,683,355,824,526.48 USD.",
+      "value": 2683355824526.48,
       "data_ready": true
     },
     {
       "name": "TOTAL2",
-      "change_pct": -2.8354,
-      "note": "BTC hariç piyasa değeri yaklaşık 1,123,103,057,178.45 USD. Altcoin geniş piyasa gücü için izlenir.",
-      "value": 1123103057178.45,
+      "change_pct": -3.0665,
+      "note": "BTC hariç piyasa değeri yaklaşık 1,114,974,595,428.12 USD. Altcoin geniş piyasa gücü için izlenir.",
+      "value": 1114974595428.12,
       "data_ready": true
     },
     {
       "name": "TOTAL3",
-      "change_pct": -2.8354,
-      "note": "BTC ve ETH hariç piyasa değeri yaklaşık 819,623,606,597.31 USD. Altcoin risk iştahı için ana filtredir.",
-      "value": 819623606597.31,
+      "change_pct": -3.0665,
+      "note": "BTC ve ETH hariç piyasa değeri yaklaşık 814,699,028,596.13 USD. Altcoin risk iştahı için ana filtredir.",
+      "value": 814699028596.13,
       "data_ready": true
     },
     {
       "name": "BTC Dominance",
       "change_pct": null,
-      "note": "BTC piyasa payı yaklaşık %58.4272. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir.",
-      "value": 58.4272,
+      "note": "BTC piyasa payı yaklaşık %58.4485. BTC ağırlığı artarsa altcoinlerde seçici olmak gerekir.",
+      "value": 58.4485,
       "data_ready": true
     },
     {
       "name": "ETH Dominance",
       "change_pct": null,
-      "note": "ETH piyasa payı yaklaşık %11.2336. Altcoin iştahı için izlenir.",
-      "value": 11.2336,
+      "note": "ETH piyasa payı yaklaşık %11.1903. Altcoin iştahı için izlenir.",
+      "value": 11.1903,
       "data_ready": true
     },
     {
       "name": "USDT.D",
       "change_pct": null,
-      "note": "USDT piyasa payı yaklaşık %6.7716. Yükseliş riskten kaçışı, düşüş risk iştahını gösterebilir.",
-      "value": 6.7716,
+      "note": "USDT piyasa payı yaklaşık %6.8215. Yükseliş riskten kaçışı, düşüş risk iştahını gösterebilir.",
+      "value": 6.8215,
       "data_ready": true
     }
   ],
@@ -133,14 +133,14 @@
       "name": "Bitcoin",
       "symbol": "BTCUSDT",
       "currency": " $",
-      "last_price": 78703.7578,
-      "change_pct": 0.3381,
+      "last_price": 78265.8281,
+      "change_pct": -0.2202,
       "support": 77083.4141,
       "resistance": 81271.7422,
       "volume_status": "Normal",
-      "trend": "Güçleniyor",
+      "trend": "Kararsız",
       "comment": "Bitcoin Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.34%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -0.22%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -289,8 +289,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 78703.7578,
-          "volume": 28615030784.0
+          "close": 78265.8281,
+          "volume": 28374450176.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -305,14 +305,14 @@
       "name": "Ethereum",
       "symbol": "ETHUSDT",
       "currency": " $",
-      "last_price": 2489.9299,
-      "change_pct": 0.2007,
+      "last_price": 2466.72,
+      "change_pct": -0.7333,
       "support": 2391.501,
       "resistance": 2515.2817,
       "volume_status": "Normal",
-      "trend": "Güçleniyor",
+      "trend": "Kararsız",
       "comment": "Ethereum Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.20%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -0.73%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -461,8 +461,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 2489.9299,
-          "volume": 13935813632.0
+          "close": 2466.72,
+          "volume": 13677730816.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -477,14 +477,14 @@
       "name": "Solana",
       "symbol": "SOLUSDT",
       "currency": " $",
-      "last_price": 103.38,
-      "change_pct": 0.0531,
+      "last_price": 102.36,
+      "change_pct": -0.934,
       "support": 93.6536,
       "resistance": 109.2082,
       "volume_status": "Normal",
-      "trend": "Güçleniyor",
+      "trend": "Kararsız",
       "comment": "Solana Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.05%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -0.93%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -633,8 +633,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 103.38,
-          "volume": 2763358208.0
+          "close": 102.36,
+          "volume": 2681350400.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -649,14 +649,14 @@
       "name": "BNB",
       "symbol": "BNBUSDT",
       "currency": " $",
-      "last_price": 740.76,
-      "change_pct": -1.5509,
+      "last_price": 737.25,
+      "change_pct": -2.0174,
       "support": 682.7491,
       "resistance": 766.9117,
       "volume_status": "Zayıf",
       "trend": "Kararsız",
       "comment": "BNB Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim -1.55%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -2.02%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -805,8 +805,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 740.76,
-          "volume": 1604553856.0
+          "close": 737.25,
+          "volume": 1586681088.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -821,14 +821,14 @@
       "name": "XRP",
       "symbol": "XRPUSDT",
       "currency": " $",
-      "last_price": 1.4217,
-      "change_pct": 0.3884,
+      "last_price": 1.4016,
+      "change_pct": -1.0309,
       "support": 1.3498,
       "resistance": 1.5222,
-      "volume_status": "Artıyor",
-      "trend": "Kararsız",
+      "volume_status": "Normal",
+      "trend": "Zayıflıyor",
       "comment": "XRP Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.39%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -1.03%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -977,8 +977,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 1.4217,
-          "volume": 2846162432.0
+          "close": 1.4016,
+          "volume": 2671838208.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -993,14 +993,14 @@
       "name": "Cardano",
       "symbol": "ADAUSDT",
       "currency": " $",
-      "last_price": 0.2171,
-      "change_pct": -1.0032,
+      "last_price": 0.2147,
+      "change_pct": -2.0976,
       "support": 0.1927,
       "resistance": 0.2292,
       "volume_status": "Normal",
       "trend": "Kararsız",
       "comment": "Cardano Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim -1.00%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -2.10%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -1149,8 +1149,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 0.2171,
-          "volume": 540387264.0
+          "close": 0.2147,
+          "volume": 499130112.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -1165,14 +1165,14 @@
       "name": "Dogecoin",
       "symbol": "DOGEUSDT",
       "currency": " $",
-      "last_price": 0.0889,
-      "change_pct": -1.2222,
+      "last_price": 0.087,
+      "change_pct": -3.3333,
       "support": 0.0816,
       "resistance": 0.0934,
       "volume_status": "Normal",
       "trend": "Kararsız",
       "comment": "Dogecoin Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim -1.22%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -3.33%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -1321,8 +1321,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 0.0889,
-          "volume": 942260864.0
+          "close": 0.087,
+          "volume": 948766400.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -1337,14 +1337,14 @@
       "name": "Avalanche",
       "symbol": "AVAXUSDT",
       "currency": " $",
-      "last_price": 7.927,
-      "change_pct": -0.9744,
+      "last_price": 7.868,
+      "change_pct": -1.7114,
       "support": 7.1129,
       "resistance": 8.0866,
       "volume_status": "Normal",
       "trend": "Kararsız",
       "comment": "Avalanche Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim -0.97%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -1.71%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -1493,8 +1493,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 7.927,
-          "volume": 333735968.0
+          "close": 7.868,
+          "volume": 331207616.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -1502,21 +1502,21 @@
         "data_ready": false,
         "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume",
         "status_note": "Binance Futures public endpoints returned no usable futures metrics",
-        "patch_error_sample": "https://fapi3.binance.com -> HTTP 429:  | https://fapi4.binance.com -> HTTP 429: "
+        "patch_error_sample": "https://fapi3.binance.com -> Expecting value: line 1 column 1 (char 0) | https://fapi4.binance.com -> Expecting value: line 1 column 1 (char 0)"
       }
     },
     {
       "name": "Chainlink",
       "symbol": "LINKUSDT",
       "currency": " $",
-      "last_price": 11.992,
-      "change_pct": -4.1889,
+      "last_price": 11.857,
+      "change_pct": -5.2675,
       "support": 11.1046,
       "resistance": 13.2238,
       "volume_status": "Normal",
       "trend": "Kararsız",
       "comment": "Chainlink Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim -4.19%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -5.27%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -1665,8 +1665,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 11.992,
-          "volume": 482033184.0
+          "close": 11.857,
+          "volume": 470048096.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -1681,14 +1681,14 @@
       "name": "Polkadot",
       "symbol": "DOTUSDT",
       "currency": " $",
-      "last_price": 1.1311,
-      "change_pct": -9.3815,
+      "last_price": 1.1201,
+      "change_pct": -10.2628,
       "support": 0.8174,
       "resistance": 1.2482,
       "volume_status": "Artıyor",
       "trend": "Kararsız",
       "comment": "Polkadot Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim -9.38%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -10.26%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -1837,8 +1837,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 1.1311,
-          "volume": 361936736.0
+          "close": 1.1201,
+          "volume": 309915616.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -1853,14 +1853,14 @@
       "name": "Litecoin",
       "symbol": "LTCUSDT",
       "currency": " $",
-      "last_price": 54.443,
-      "change_pct": 0.2975,
+      "last_price": 53.614,
+      "change_pct": -1.2297,
       "support": 47.9063,
       "resistance": 55.2571,
       "volume_status": "Zayıf",
-      "trend": "Güçleniyor",
+      "trend": "Kararsız",
       "comment": "Litecoin Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim +0.30%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -1.23%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -2009,8 +2009,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 54.443,
-          "volume": 258438304.0
+          "close": 53.614,
+          "volume": 249853456.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -2197,14 +2197,14 @@
       "name": "Optimism",
       "symbol": "OPUSDT",
       "currency": " $",
-      "last_price": 0.1028,
-      "change_pct": -2.3742,
+      "last_price": 0.1007,
+      "change_pct": -4.3685,
       "support": 0.0864,
       "resistance": 0.1123,
       "volume_status": "Zayıf",
       "trend": "Kararsız",
       "comment": "Optimism Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim -2.37%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim -4.37%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -2353,8 +2353,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 0.1028,
-          "volume": 64484828.0
+          "close": 0.1007,
+          "volume": 63456560.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -2369,14 +2369,14 @@
       "name": "NEAR",
       "symbol": "NEARUSDT",
       "currency": " $",
-      "last_price": 2.6133,
-      "change_pct": 12.8319,
+      "last_price": 2.5067,
+      "change_pct": 8.2294,
       "support": 1.8186,
-      "resistance": 2.6133,
+      "resistance": 2.5067,
       "volume_status": "Artıyor",
       "trend": "Güçleniyor",
       "comment": "NEAR Binance Futures verisi alınamadığı için spot fiyat/hacim yedeğiyle izlendi. Futures delta/OI gelirse ayrıca skorlanır.",
-      "compare": "Yedek kaynağa göre 24 saatlik değişim +12.83%.",
+      "compare": "Yedek kaynağa göre 24 saatlik değişim +8.23%.",
       "history": [
         {
           "date": "2026-08-11",
@@ -2525,8 +2525,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 2.6133,
-          "volume": 713887232.0
+          "close": 2.5067,
+          "volume": 742946688.0
         }
       ],
       "fallback_source": "Yahoo Finance spot fallback",
@@ -2564,14 +2564,14 @@
       "name": "Altın",
       "symbol": "GC=F",
       "currency": " $",
-      "last_price": 4457.6001,
-      "change_pct": 1.4497,
+      "last_price": 4443.5,
+      "change_pct": 1.1288,
       "support": 4348.0,
       "resistance": 4640.7998,
       "volume_status": "Artıyor",
       "trend": "Kararsız",
       "comment": "Altın net yön üretmiyor. Destek ve direnç arası takip edilmeli.",
-      "compare": "Düne göre değişim +1.45%.",
+      "compare": "Düne göre değişim +1.13%.",
       "history": [
         {
           "date": "2026-07-29",
@@ -2720,8 +2720,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 4457.6001,
-          "volume": 148186.0
+          "close": 4443.5,
+          "volume": 159783.0
         }
       ]
     },
@@ -2729,14 +2729,14 @@
       "name": "Brent Petrol",
       "symbol": "BZ=F",
       "currency": " $",
-      "last_price": 100.89,
-      "change_pct": 3.0331,
+      "last_price": 101.56,
+      "change_pct": 3.7173,
       "support": 87.07,
-      "resistance": 100.89,
+      "resistance": 101.56,
       "volume_status": "Artıyor",
       "trend": "Güçleniyor",
       "comment": "Brent Petrol tarafında alıcılar güçleniyor. Direnç üstü kalıcılık izlenmeli.",
-      "compare": "Düne göre değişim +3.03%.",
+      "compare": "Düne göre değişim +3.72%.",
       "history": [
         {
           "date": "2026-07-29",
@@ -2885,8 +2885,8 @@
         },
         {
           "date": "2026-09-09",
-          "close": 100.89,
-          "volume": 42504.0
+          "close": 101.56,
+          "volume": 49900.0
         }
       ]
     }
@@ -3453,8 +3453,8 @@
         "direction": "SHORT",
         "score": 100,
         "action": "SHORT adayı",
-        "price_change_pct": -9.3815,
-        "relative_to_btc_pct": -9.719600000000002,
+        "price_change_pct": -10.2628,
+        "relative_to_btc_pct": -10.0426,
         "score_breakdown": {
           "base_macro": 51,
           "trend": 18,
@@ -3471,7 +3471,7 @@
         "reasons": [
           "Makro rejim: SHORT ağırlıklı / risk-off.",
           "Trend: Kararsız, hacim: Artıyor.",
-          "Fiyat değişim: -9.3815%, BTC'ye göre fark: -9.7196 puan.",
+          "Fiyat değişim: -10.2628%, BTC'ye göre fark: -10.0426 puan.",
           "Delta oranı: -, taker al/sat: -.",
           "OI değişim: -, funding: -.",
           "Fiyat destek/direnç arasında.",
@@ -3490,15 +3490,15 @@
         "symbol": "LINKUSDT",
         "name": "Chainlink",
         "direction": "SHORT",
-        "score": 95.4,
+        "score": 99,
         "action": "SHORT adayı",
-        "price_change_pct": -4.1889,
-        "relative_to_btc_pct": -4.527,
+        "price_change_pct": -5.2675,
+        "relative_to_btc_pct": -5.0473,
         "score_breakdown": {
           "base_macro": 51,
-          "trend": 16.76,
+          "trend": 18,
           "volume": 5,
-          "relative_strength": 22.64,
+          "relative_strength": 25,
           "futures": 0,
           "location": 0
         },
@@ -3510,7 +3510,7 @@
         "reasons": [
           "Makro rejim: SHORT ağırlıklı / risk-off.",
           "Trend: Kararsız, hacim: Normal.",
-          "Fiyat değişim: -4.1889%, BTC'ye göre fark: -4.5270 puan.",
+          "Fiyat değişim: -5.2675%, BTC'ye göre fark: -5.0473 puan.",
           "Delta oranı: -, taker al/sat: -.",
           "OI değişim: -, funding: -.",
           "Fiyat destek/direnç arasında.",
@@ -3526,96 +3526,57 @@
         }
       },
       {
-        "symbol": "NEARUSDT",
-        "name": "NEAR",
-        "direction": "LONG",
-        "score": 82,
-        "action": "LONG adayı",
-        "price_change_pct": 12.8319,
-        "relative_to_btc_pct": 12.493799999999998,
-        "score_breakdown": {
-          "base_macro": 20,
-          "trend": 40,
-          "volume": 12,
-          "relative_strength": 25,
-          "futures": 0,
-          "location": -15
-        },
-        "higher_tf": "1h",
-        "setup_tf": "15m",
-        "entry_tf": "5m",
-        "style": "Gün içi momentum",
-        "timeframe_note": "Hareket güçlü; 15m yapı ve 5m tetik beklenmeli.",
-        "reasons": [
-          "Makro rejim: SHORT ağırlıklı / risk-off.",
-          "Trend: Güçleniyor, hacim: Artıyor.",
-          "Fiyat değişim: 12.8319%, BTC'ye göre fark: 12.4938 puan.",
-          "Delta oranı: -, taker al/sat: -.",
-          "OI değişim: -, funding: -.",
-          "Fiyat dirence çok yakın; long için geç kalma riski var.",
-          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
-        ],
-        "entry_plan": "15m destekten dönüş veya direnç üstü kapanış beklenir. 5m pozitif delta/taker teyidi aranır.",
-        "invalid_if": "Destek altı kapanış veya pozitif deltanın kaybolması. Takip destek: 1.8186 $.",
-        "futures_metrics": {
-          "data_ready": false,
-          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume",
-          "status_note": "Binance Futures public endpoints returned no usable futures metrics",
-          "patch_error_sample": "https://fapi3.binance.com -> HTTP 429:  | https://fapi4.binance.com -> HTTP 429: "
-        }
-      },
-      {
-        "symbol": "AVAXUSDT",
-        "name": "Avalanche",
+        "symbol": "XRPUSDT",
+        "name": "XRP",
         "direction": "SHORT",
-        "score": 74.5,
+        "score": 86.2,
         "action": "SHORT adayı",
-        "price_change_pct": -0.9744,
-        "relative_to_btc_pct": -1.3125,
+        "price_change_pct": -1.0309,
+        "relative_to_btc_pct": -0.8107,
         "score_breakdown": {
           "base_macro": 51,
-          "trend": 3.9,
+          "trend": 26.12,
           "volume": 5,
-          "relative_strength": 6.56,
+          "relative_strength": 4.05,
           "futures": 0,
-          "location": 8
+          "location": 0
         },
-        "higher_tf": "1h",
-        "setup_tf": "15m",
-        "entry_tf": "5m / 3m",
-        "style": "Seçici kısa vade",
-        "timeframe_note": "Piyasa kararsız; destek/direnç teyidi olmadan işlem aranmaz.",
+        "higher_tf": "4h / 1h",
+        "setup_tf": "30m / 15m",
+        "entry_tf": "5m",
+        "style": "Trend devamı",
+        "timeframe_note": "Üst zaman dilimi yönü bozmadan 15m-30m setup aranmalı.",
         "reasons": [
           "Makro rejim: SHORT ağırlıklı / risk-off.",
-          "Trend: Kararsız, hacim: Normal.",
-          "Fiyat değişim: -0.9744%, BTC'ye göre fark: -1.3125 puan.",
+          "Trend: Zayıflıyor, hacim: Normal.",
+          "Fiyat değişim: -1.0309%, BTC'ye göre fark: -0.8107 puan.",
           "Delta oranı: -, taker al/sat: -.",
           "OI değişim: -, funding: -.",
-          "Fiyat direnç bölgesine yakın; red teyidi aranabilir.",
+          "Fiyat destek/direnç arasında.",
           "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
         ],
-        "entry_plan": "15m direnç retesti veya destek kırılımı beklenir. 5m / 3m negatif delta/taker teyidi aranır.",
-        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 8.0866 $.",
+        "entry_plan": "30m / 15m direnç retesti veya destek kırılımı beklenir. 5m negatif delta/taker teyidi aranır.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 1.5222 $.",
         "futures_metrics": {
           "data_ready": false,
           "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume",
           "status_note": "Binance Futures public endpoints returned no usable futures metrics",
-          "patch_error_sample": "https://fapi3.binance.com -> HTTP 429:  | https://fapi4.binance.com -> HTTP 429: "
+          "patch_error_sample": "https://fapi3.binance.com -> Expecting value: line 1 column 1 (char 0) | https://fapi4.binance.com -> Expecting value: line 1 column 1 (char 0)"
         }
       },
       {
         "symbol": "DOGEUSDT",
         "name": "Dogecoin",
         "direction": "SHORT",
-        "score": 68.7,
-        "action": "İzleme / SHORT eğilimi",
-        "price_change_pct": -1.2222,
-        "relative_to_btc_pct": -1.5603,
+        "score": 84.9,
+        "action": "SHORT adayı",
+        "price_change_pct": -3.3333,
+        "relative_to_btc_pct": -3.1130999999999998,
         "score_breakdown": {
           "base_macro": 51,
-          "trend": 4.89,
+          "trend": 13.33,
           "volume": 5,
-          "relative_strength": 7.8,
+          "relative_strength": 15.57,
           "futures": 0,
           "location": 0
         },
@@ -3627,7 +3588,7 @@
         "reasons": [
           "Makro rejim: SHORT ağırlıklı / risk-off.",
           "Trend: Kararsız, hacim: Normal.",
-          "Fiyat değişim: -1.2222%, BTC'ye göre fark: -1.5603 puan.",
+          "Fiyat değişim: -3.3333%, BTC'ye göre fark: -3.1131 puan.",
           "Delta oranı: -, taker al/sat: -.",
           "OI değişim: -, funding: -.",
           "Fiyat destek/direnç arasında.",
@@ -3646,15 +3607,15 @@
         "symbol": "OPUSDT",
         "name": "Optimism",
         "direction": "SHORT",
-        "score": 68.1,
-        "action": "İzleme / SHORT eğilimi",
-        "price_change_pct": -2.3742,
-        "relative_to_btc_pct": -2.7123,
+        "score": 83.2,
+        "action": "SHORT adayı",
+        "price_change_pct": -4.3685,
+        "relative_to_btc_pct": -4.1483,
         "score_breakdown": {
           "base_macro": 51,
-          "trend": 9.5,
+          "trend": 17.47,
           "volume": -6,
-          "relative_strength": 13.56,
+          "relative_strength": 20.74,
           "futures": 0,
           "location": 0
         },
@@ -3666,7 +3627,7 @@
         "reasons": [
           "Makro rejim: SHORT ağırlıklı / risk-off.",
           "Trend: Kararsız, hacim: Zayıf.",
-          "Fiyat değişim: -2.3742%, BTC'ye göre fark: -2.7123 puan.",
+          "Fiyat değişim: -4.3685%, BTC'ye göre fark: -4.1483 puan.",
           "Delta oranı: -, taker al/sat: -.",
           "OI değişim: -, funding: -.",
           "Fiyat destek/direnç arasında.",
@@ -3682,20 +3643,59 @@
         }
       },
       {
-        "symbol": "ADAUSDT",
-        "name": "Cardano",
+        "symbol": "NEARUSDT",
+        "name": "NEAR",
+        "direction": "LONG",
+        "score": 82,
+        "action": "LONG adayı",
+        "price_change_pct": 8.2294,
+        "relative_to_btc_pct": 8.4496,
+        "score_breakdown": {
+          "base_macro": 20,
+          "trend": 40,
+          "volume": 12,
+          "relative_strength": 25,
+          "futures": 0,
+          "location": -15
+        },
+        "higher_tf": "1h",
+        "setup_tf": "15m",
+        "entry_tf": "5m",
+        "style": "Gün içi momentum",
+        "timeframe_note": "Hareket güçlü; 15m yapı ve 5m tetik beklenmeli.",
+        "reasons": [
+          "Makro rejim: SHORT ağırlıklı / risk-off.",
+          "Trend: Güçleniyor, hacim: Artıyor.",
+          "Fiyat değişim: 8.2294%, BTC'ye göre fark: 8.4496 puan.",
+          "Delta oranı: -, taker al/sat: -.",
+          "OI değişim: -, funding: -.",
+          "Fiyat dirence çok yakın; long için geç kalma riski var.",
+          "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
+        ],
+        "entry_plan": "15m destekten dönüş veya direnç üstü kapanış beklenir. 5m pozitif delta/taker teyidi aranır.",
+        "invalid_if": "Destek altı kapanış veya pozitif deltanın kaybolması. Takip destek: 1.8186 $.",
+        "futures_metrics": {
+          "data_ready": false,
+          "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume",
+          "status_note": "Binance Futures public endpoints returned no usable futures metrics",
+          "patch_error_sample": "https://fapi3.binance.com -> HTTP 429:  | https://fapi4.binance.com -> HTTP 429: "
+        }
+      },
+      {
+        "symbol": "AVAXUSDT",
+        "name": "Avalanche",
         "direction": "SHORT",
-        "score": 66.7,
-        "action": "İzleme / SHORT eğilimi",
-        "price_change_pct": -1.0032,
-        "relative_to_btc_pct": -1.3413000000000002,
+        "score": 78.3,
+        "action": "SHORT adayı",
+        "price_change_pct": -1.7114,
+        "relative_to_btc_pct": -1.4912,
         "score_breakdown": {
           "base_macro": 51,
-          "trend": 4.01,
+          "trend": 6.85,
           "volume": 5,
-          "relative_strength": 6.71,
+          "relative_strength": 7.46,
           "futures": 0,
-          "location": 0
+          "location": 8
         },
         "higher_tf": "1h",
         "setup_tf": "15m",
@@ -3705,14 +3705,14 @@
         "reasons": [
           "Makro rejim: SHORT ağırlıklı / risk-off.",
           "Trend: Kararsız, hacim: Normal.",
-          "Fiyat değişim: -1.0032%, BTC'ye göre fark: -1.3413 puan.",
+          "Fiyat değişim: -1.7114%, BTC'ye göre fark: -1.4912 puan.",
           "Delta oranı: -, taker al/sat: -.",
           "OI değişim: -, funding: -.",
-          "Fiyat destek/direnç arasında.",
+          "Fiyat direnç bölgesine yakın; red teyidi aranabilir.",
           "Eksik coin verisi: delta, OI değişim, taker al/sat, funding."
         ],
         "entry_plan": "15m direnç retesti veya destek kırılımı beklenir. 5m / 3m negatif delta/taker teyidi aranır.",
-        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 0.2292 $.",
+        "invalid_if": "Direnç üstü kapanış veya negatif deltanın kaybolması. Takip direnç: 8.0866 $.",
         "futures_metrics": {
           "data_ready": false,
           "source": "Binance Futures unavailable, Yahoo spot fallback used for price/volume",
